@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Iron Faries — Solution Summary Deck</title>
+<style>
+@page { size: landscape; margin: 0; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Segoe UI', -apple-system, sans-serif; }
+
+/* ====== SLIDE 1: One-Pager (Light Theme) ====== */
+.slide-onepager {
+  width: 1280px; height: 720px;
+  background: #ebe6dc;
+  color: #1a1a1a;
+  padding: 14px 20px;
+  position: relative;
+  overflow: hidden;
+  page-break-after: always;
+}
+.slide-onepager .top-row { display: flex; gap: 16px; margin-bottom: 12px; }
+.slide-onepager .second-row { display: flex; gap: 16px; margin-bottom: 12px; }
+.slide-onepager .box {
+  background: white;
+  border-radius: 10px;
+  padding: 14px 18px;
+  position: relative;
+}
+.slide-onepager .box-label {
+  font-size: 11px; font-weight: 700; color: #1a68c7;
+  margin-bottom: 6px;
+}
+.slide-onepager .top-row .box { flex: 1; padding: 10px 16px; }
+.slide-onepager .second-row .box { flex: 1; padding: 10px 16px; }
+.slide-onepager .box-value { font-size: 13px; color: #222; }
+.slide-onepager .box-value-sm { font-size: 11px; color: #333; line-height: 1.5; }
+.slide-onepager .hashtag { color: #b8860b; font-weight: 700; }
+.slide-onepager .solution-tag { color: #1a8a5a; font-weight: 700; }
+.slide-onepager ul.content-list {
+  list-style: none; padding: 0; margin: 0;
+  font-size: 11px; color: #333; line-height: 1.6;
+}
+.slide-onepager ul.content-list li { margin-bottom: 3px; padding-left: 10px; position: relative; }
+.slide-onepager ul.content-list li::before { content: '•'; position: absolute; left: 0; color: #1a68c7; font-weight: 700; }
+.slide-onepager .badge {
+  position: absolute; top: 16px; right: 24px; text-align: right;
+}
+.slide-onepager .badge-text {
+  font-family: 'Georgia', serif; font-size: 20px; color: #1a68c7; font-style: italic;
+}
+.slide-onepager .badge-year {
+  display: inline-block; background: #1a68c7; color: white;
+  font-size: 11px; font-weight: 700; border-radius: 4px; padding: 2px 6px;
+  margin-left: 4px; font-style: normal;
+}
+.slide-onepager .footer-light {
+  margin-top: 12px; display: flex; justify-content: space-between;
+  font-size: 9px; color: #888;
+}
+
+/* ====== SLIDES 2-4: Supporting (Dark Theme) ====== */
+.slide {
+  width: 1280px; height: 720px;
+  background: linear-gradient(135deg, #0a0f1e 0%, #111b33 50%, #0d1525 100%);
+  color: #e0e8f0;
+  padding: 36px 44px;
+  page-break-after: always;
+  position: relative;
+  overflow: hidden;
+}
+.slide::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, #00c8e6, #1a68c7, #4ade80);
+}
+.slide-title {
+  font-size: 26px; font-weight: 300; color: white; margin-bottom: 3px;
+  letter-spacing: -0.5px;
+}
+.slide-title span { color: #00c8e6; font-weight: 600; }
+.slide-subtitle { font-size: 12px; color: #7aa3c8; margin-bottom: 16px; }
+
+.two-col { display: flex; gap: 20px; }
+.col { flex: 1; }
+
+.card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+}
+.card-title {
+  font-size: 11px; font-weight: 700; color: #00c8e6;
+  text-transform: uppercase; letter-spacing: 0.8px;
+  margin-bottom: 6px;
+}
+
+.hashtag-dark { color: #fcd34d; font-weight: 700; font-size: 10.5px; }
+.solution-tag-dark { color: #4ade80; font-weight: 700; font-size: 10.5px; }
+.bullet { font-size: 10.5px; color: #c8d8e8; line-height: 1.55; margin-left: 8px; }
+.bullet li { margin-bottom: 2px; }
+
+.metric-box {
+  background: rgba(0,200,230,0.08);
+  border: 1px solid rgba(0,200,230,0.25);
+  border-radius: 8px;
+  padding: 10px 14px;
+  text-align: center;
+  flex: 1;
+}
+.metric-box .num { font-size: 20px; font-weight: 700; color: #00c8e6; }
+.metric-box .label { font-size: 9px; color: #7aa3c8; margin-top: 2px; }
+
+table.data {
+  width: 100%; border-collapse: collapse; font-size: 11px;
+}
+table.data th {
+  padding: 5px 8px; text-align: left;
+  border-bottom: 2px solid #1a68c7;
+  color: #7aa3c8; font-weight: 600; font-size: 9.5px; text-transform: uppercase;
+}
+table.data td {
+  padding: 4px 8px; border-bottom: 1px solid rgba(255,255,255,0.06);
+  color: #c8d8e8;
+}
+table.data tr:last-child td { border-bottom: none; font-weight: 700; color: #4ade80; }
+
+.remark {
+  background: rgba(252,211,77,0.08);
+  border-left: 3px solid #fcd34d;
+  padding: 6px 10px;
+  margin-top: 8px;
+  border-radius: 0 6px 6px 0;
+  font-size: 9px; color: #e8d8a0; line-height: 1.5;
+}
+
+.stage-row { display: flex; gap: 10px; }
+.stage-box { flex: 1; border-radius: 8px; padding: 10px 14px; }
+.stage-box.s1 { background: rgba(26,104,199,0.15); border: 1px solid rgba(26,104,199,0.4); }
+.stage-box.s2 { background: rgba(0,200,230,0.1); border: 1px solid rgba(0,200,230,0.3); }
+.stage-box.s3 { background: rgba(74,222,128,0.1); border: 1px solid rgba(74,222,128,0.3); }
+.stage-box.s4 { background: rgba(252,211,77,0.08); border: 1px solid rgba(252,211,77,0.3); }
+.stage-label { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.stage-box.s1 .stage-label { color: #60a5fa; }
+.stage-box.s2 .stage-label { color: #00c8e6; }
+.stage-box.s3 .stage-label { color: #4ade80; }
+.stage-box.s4 .stage-label { color: #fcd34d; }
+.stage-title { font-size: 13px; font-weight: 700; color: white; margin-bottom: 3px; }
+.stage-detail { font-size: 10px; color: #a8ccf0; line-height: 1.4; }
+
+.arrow-connector {
+  display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
+}
+.arrow-connector .arrow { color: #1a68c7; font-size: 16px; margin: 0 6px; }
+.arrow-connector .text { font-size: 9.5px; color: #7aa3c8; }
+
+.risk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.risk-item {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 6px; padding: 6px 10px;
+}
+.risk-item .risk-label { font-size: 9.5px; font-weight: 700; color: #f87171; margin-bottom: 2px; }
+.risk-item .mitigation { font-size: 9.5px; color: #4ade80; }
+
+.scale-row { display: flex; gap: 10px; }
+.scale-item {
+  flex: 1; text-align: center;
+  background: rgba(0,200,230,0.06);
+  border: 1px solid rgba(0,200,230,0.2);
+  border-radius: 6px; padding: 8px;
+}
+.scale-item .tag { font-size: 9.5px; font-weight: 700; color: #fcd34d; }
+.scale-item .desc { font-size: 9px; color: #a8ccf0; margin-top: 3px; }
+
+.footer {
+  position: absolute; bottom: 12px; left: 44px; right: 44px;
+  display: flex; justify-content: space-between;
+  font-size: 9px; color: #4a6080;
+}
+
+.layer-title {
+  font-size: 14px; font-weight: 700; color: white; margin-bottom: 8px;
+  padding-bottom: 4px; border-bottom: 1px solid rgba(0,200,230,0.3);
+}
+.layer-title span { color: #00c8e6; }
+
+.dim-title { font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+.dim1 .dim-title { color: #00c8e6; }
+.dim2 .dim-title { color: #4ade80; }
+.observation { font-size: 9.5px; color: #a8ccf0; font-style: italic; margin-top: 4px; }
+
+.full-width-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-bottom: 10px;
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PAGE 1: ONE-PAGER (Light Theme) ==================== -->
+<div class="slide-onepager">
+
+  <div class="badge">
+    <span class="badge-text">Hyperchallenge</span><span class="badge-year">2026</span>
+  </div>
+
+  <div class="top-row">
+    <div class="box">
+      <div class="box-label">Name of the Team</div>
+      <div class="box-value">Iron Faries</div>
+    </div>
+    <div class="box">
+      <div class="box-label">BYO Use Case</div>
+      <div class="box-value">Digital Twin Factory — An Agent That Builds Agents</div>
+    </div>
+  </div>
+
+  <div class="second-row">
+    <div class="box">
+      <div class="box-label">Team Members</div>
+      <div class="box-value">Gigi Ma, gigi.ma@zurich.com</div>
+    </div>
+    <div class="box">
+      <div class="box-label">Main learning from experience</div>
+      <ul class="content-list" style="font-size: 10px;">
+        <li><span class="hashtag">#ArchitectureFirst</span> — 3 options evaluated; the "obvious" approach was 6x more expensive. Design structure before features.</li>
+        <li><span class="hashtag">#AgenticThinking</span> — Reason → Plan → Decide → Self-Correct. A learnable, repeatable framework — not magic.</li>
+        <li><span class="hashtag">#GoodAgentCriteria</span> — Reusability, token efficiency, security, human approval, self-improvement. Without scoring these, agents can't scale.</li>
+        <li><span class="hashtag">#GuardrailsNotGatekeeping</span> — Citizen developers CAN touch production data — with HITL, PII masking, audit trails, and parallel runs.</li>
+        <li><span class="hashtag">#ProgressiveAutonomy</span> — Start 100% human approval. As accuracy proves, gradually release.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: auto auto; gap: 12px;">
+
+    <div class="box">
+      <div class="box-label">Description and quantification of the problem</div>
+      <div style="font-size: 12px; color: #1a1a1a; font-weight: 700; margin-bottom: 6px;">
+        No one knows how to approach AI — even though everyone wants to automate the 80% repetitive tasks.
+      </div>
+      <ul class="content-list">
+        <li><span class="hashtag">#StartingHurdle</span> — 95% lack tech skills; traditional AI needs devs, months, $$$. Nothing starts.</li>
+        <li><span class="hashtag">#ExpensiveAI</span> — "AI = expensive" kills every scaling conversation.</li>
+        <li><span class="hashtag">#OneSizeFailsAll</span> — Generic chatbots fit no one; staff try once, quit.</li>
+        <li><span class="hashtag">#TrustGap</span> — AI repeats mistakes; trust erodes; adoption dies.</li>
+        <li><span class="hashtag">#ShelfwareRisk</span> — Role changes = tool obsolete. Rebuild = back to zero.</li>
+      </ul>
+      <div style="margin-top: 8px; font-size: 10.5px; color: #c0392b; font-weight: 600;">
+        Cost: $31K/year wasted per person × 1,000 HK staff = $31M annual opportunity lost.
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="box-label">How your approach is solving the problem</div>
+      <div style="font-size: 11.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 5px;">Digital Twin Factory — one solution, five problems killed.</div>
+      <ul class="content-list">
+        <li><span class="hashtag">#StartingHurdle</span> → <span class="solution-tag">Agent Builds Agents</span> — Just talk. Dump SOPs, JDs, recordings. 11 agents build your twin in 10 min. Zero coding.</li>
+        <li><span class="hashtag">#ExpensiveAI</span> → <span class="solution-tag">Cost-Smart 2-Layer</span> — Claude thinks, n8n does (85% cheaper). Less than a coffee a day.</li>
+        <li><span class="hashtag">#OneSizeFailsAll</span> → <span class="solution-tag">Your Twin ≠ My Twin</span> — Same factory, completely different skills per role.</li>
+        <li><span class="hashtag">#TrustGap</span> → <span class="solution-tag">Easy Feedback, Skills Learn</span> — Approve / Edit / Reject. Every correction permanent.</li>
+        <li><span class="hashtag">#ShelfwareRisk</span> → <span class="solution-tag">Grows With You</span> — Process changed? Add a skill. No rebuild.</li>
+      </ul>
+    </div>
+
+    <div class="box" style="font-size: 10px;">
+      <div class="box-label">What the results of the prototype are</div>
+      <div style="font-size: 10.5px; font-weight: 700; color: #1a1a1a; margin-bottom: 2px;">Prototype Results — 1 Built Twin: Sarah Chan, Claims Handler</div>
+      <div style="font-size: 9px; color: #666; font-style: italic; margin-bottom: 6px;">Each twin will have different metrics; below is our first proof point</div>
+
+      <div style="font-size: 9.5px; font-weight: 700; color: #1a68c7; margin-bottom: 3px;">Layer 1: Factory Agent (runs once)</div>
+      <ul class="content-list" style="font-size: 9.5px; margin-bottom: 6px;">
+        <li>Agents built: 1 twin (Sarah Chan — Claims Handler, 4 skills)</li>
+        <li>Token use: ~$3 one-time</li>
+        <li>Output: Twin Agent with 4 skills — Claim Handling, Email Reply, Reporting, EXCO Prep</li>
+      </ul>
+
+      <div style="font-size: 9.5px; font-weight: 700; color: #1a68c7; margin-bottom: 3px;">Layer 2: Twin Agent Daily Run (2-week field trial)</div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 9px; margin-bottom: 4px;">
+        <tr style="border-bottom: 1px solid #1a68c7;"><th style="padding: 2px 4px; text-align: left; color: #1a68c7; font-size: 8px;">Skill</th><th style="padding: 2px 4px; color: #1a68c7; font-size: 8px;">Freq</th><th style="padding: 2px 4px; color: #1a68c7; font-size: 8px;">$/Day</th><th style="padding: 2px 4px; color: #1a68c7; font-size: 8px;">Saved/Wk</th><th style="padding: 2px 4px; color: #1a68c7; font-size: 8px;">Accuracy</th></tr>
+        <tr><td style="padding: 2px 4px;">Claim Handling</td><td style="padding: 2px 4px;">8x/day</td><td style="padding: 2px 4px;">$0.18</td><td style="padding: 2px 4px;">5.5 hrs</td><td style="padding: 2px 4px;">89%</td></tr>
+        <tr><td style="padding: 2px 4px;">Email Reply</td><td style="padding: 2px 4px;">12x/day</td><td style="padding: 2px 4px;">$0.14</td><td style="padding: 2px 4px;">4.5 hrs</td><td style="padding: 2px 4px;">94%</td></tr>
+        <tr><td style="padding: 2px 4px;">Reporting</td><td style="padding: 2px 4px;">2x/mo</td><td style="padding: 2px 4px;">$0.03</td><td style="padding: 2px 4px;">2.5 hrs</td><td style="padding: 2px 4px;">100%</td></tr>
+        <tr><td style="padding: 2px 4px;">EXCO Prep</td><td style="padding: 2px 4px;">1x/wk</td><td style="padding: 2px 4px;">$0.02</td><td style="padding: 2px 4px;">2.0 hrs</td><td style="padding: 2px 4px;">88%</td></tr>
+        <tr style="border-top: 1px solid #1a8a5a;"><td style="padding: 2px 4px; font-weight: 700; color: #1a8a5a;">TOTAL</td><td style="padding: 2px 4px;"></td><td style="padding: 2px 4px; font-weight: 700; color: #1a8a5a;">$0.42/day</td><td style="padding: 2px 4px; font-weight: 700; color: #1a8a5a;">14.5 hrs/wk</td><td style="padding: 2px 4px; font-weight: 700; color: #1a8a5a;">91%</td></tr>
+      </table>
+      <div style="font-size: 8.5px; color: #b8860b;">Every twin is different — that's #YourTwin≠MyTwin in action.</div>
+    </div>
+
+    <div class="box">
+      <div class="box-label">What are the next steps for scaling your solution</div>
+      <div style="font-size: 11px; font-weight: 700; color: #1a1a1a; margin-bottom: 6px;">Roll-Out Plan — Champions first, then depth, then breadth</div>
+      <table style="width: 100%; border-collapse: collapse; font-size: 10px;">
+        <tr style="border-bottom: 2px solid #1a68c7;">
+          <th style="padding: 4px 6px; text-align: left; color: #1a68c7; font-size: 9px;">Stage</th>
+          <th style="padding: 4px 6px; text-align: left; color: #1a68c7; font-size: 9px;">Goal</th>
+          <th style="padding: 4px 6px; text-align: left; color: #1a68c7; font-size: 9px;">Who / What</th>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0;">
+          <td style="padding: 5px 6px; font-weight: 700;">Stage 1<br/><span style="font-size: 8px; color: #666; font-weight: 400;">Month 1–2</span></td>
+          <td style="padding: 5px 6px;">Prove it works for ANY role on Day 1</td>
+          <td style="padding: 5px 6px;">2 champions × 8 depts = 16 diverse twins</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0;">
+          <td style="padding: 5px 6px; font-weight: 700;">Stage 2<br/><span style="font-size: 8px; color: #666; font-weight: 400;">Month 3–6</span></td>
+          <td style="padding: 5px 6px;">Full adoption; champions become peer trainers</td>
+          <td style="padding: 5px 6px;">ALL users per team. 200+ twins</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e0e0e0;">
+          <td style="padding: 5px 6px; font-weight: 700;">Stage 3<br/><span style="font-size: 8px; color: #666; font-weight: 400;">Month 6–12</span></td>
+          <td style="padding: 5px 6px;">Reuse — no rebuild, just adapt. Speed ×10</td>
+          <td style="padding: 5px 6px;">Proven agents carry across BUs & regions</td>
+        </tr>
+        <tr>
+          <td style="padding: 5px 6px; font-weight: 700; color: #1a8a5a;">Stage 4<br/><span style="font-size: 8px; color: #666; font-weight: 400;">Year 2+</span></td>
+          <td style="padding: 5px 6px; font-weight: 600; color: #1a8a5a;">55,000 staff. $170M value unlock</td>
+          <td style="padding: 5px 6px;">Every employee has a twin</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="footer-light">
+    <span>INTERNAL USE ONLY</span>
+    <span>Iron Faries — Hyperchallenge 2026 | Page 1 of 4</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 2: Problem Approach & Solution Design (Dark) ==================== -->
+<div class="slide">
+  <div class="slide-title">Problem Approach & <span>Solution Design</span></div>
+  <div class="slide-subtitle">One solution, five problems killed — each Winning Theme answers a real pain point</div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="card" style="height: 100%;">
+        <div class="card-title">The Problem</div>
+        <div style="font-size: 11.5px; color: white; font-weight: 600; margin-bottom: 8px;">
+          No one knows how to approach AI — even though everyone wants to automate the 80% repetitive tasks.
+        </div>
+        <ul class="bullet">
+          <li><span class="hashtag-dark">#StartingHurdle</span> — 95% lack tech skills; needs devs, months, $$$. Nothing starts.</li>
+          <li><span class="hashtag-dark">#ExpensiveAI</span> — "AI = expensive" kills scaling. No one teaches efficient architecture.</li>
+          <li><span class="hashtag-dark">#OneSizeFailsAll</span> — Generic chatbots fit no one; staff try once, quit.</li>
+          <li><span class="hashtag-dark">#TrustGap</span> — AI repeats mistakes; trust erodes; adoption dies.</li>
+          <li><span class="hashtag-dark">#ShelfwareRisk</span> — Role changes = tool obsolete. Rebuild = zero.</li>
+        </ul>
+        <div style="margin-top: 10px; font-size: 10px; color: #f87171; font-weight: 600;">
+          Cost: $31K/year inefficient paid hours per person × 1,000 HK staff = $31M lost
+        </div>
+      </div>
+    </div>
+
+    <div class="col" style="flex: 1.3;">
+      <div class="card">
+        <div class="card-title">The Solution — Digital Twin Factory</div>
+        <ul class="bullet">
+          <li><span class="hashtag-dark">#StartingHurdle</span> → <span class="solution-tag-dark">Agent Builds Agents</span> — Dump SOPs, JDs, recordings. 11 agents build twin in 10 min. Zero coding.</li>
+          <li><span class="hashtag-dark">#ExpensiveAI</span> → <span class="solution-tag-dark">Cost-Smart 2-Layer</span> — Claude thinks, n8n does (85% cheaper). Teaches efficient architecture.</li>
+          <li><span class="hashtag-dark">#OneSizeFailsAll</span> → <span class="solution-tag-dark">Your Twin ≠ My Twin</span> — Same factory, different skills per role — tailored uniquely to you.</li>
+          <li><span class="hashtag-dark">#TrustGap</span> → <span class="solution-tag-dark">Easy Feedback</span> — Approve / Edit / Reject. Every correction permanent.</li>
+          <li><span class="hashtag-dark">#ShelfwareRisk</span> → <span class="solution-tag-dark">Grows With You</span> — Process changed? Add a skill. No rebuild.</li>
+        </ul>
+      </div>
+      <div class="card" style="margin-top: 8px;">
+        <div class="card-title">Architecture — Why This Design Wins</div>
+        <table class="data" style="font-size: 10px;">
+          <tr><th>Option</th><th>Score</th><th>Why</th></tr>
+          <tr><td>A: Single Mega-Prompt</td><td>34/100</td><td>$2.80/day, forgets context, single point of failure</td></tr>
+          <tr><td>B: Flat Agent Network</td><td>52/100</td><td>Unpredictable paths, circular calls, no quality gate</td></tr>
+          <tr><td style="color: #4ade80; font-weight: 700;">C: Orchestrated Skills</td><td style="color: #4ade80; font-weight: 700;">94/100</td><td style="color: #4ade80;">$0.42/day, testable, governance built-in</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Iron Faries — Hyperchallenge 2026</span>
+    <span>Page 2 of 4</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 3: Results & Key Insights ==================== -->
+<div class="slide">
+  <div class="slide-title">Results & <span>Key Insights</span></div>
+  <div class="slide-subtitle">Prototype: 1 Built Twin — Sarah Chan, Claims Handler (2-week field trial)</div>
+
+  <div class="layer-title"><span>Layer 1:</span> Factory Agent (runs once)</div>
+  <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+    <div class="metric-box" style="flex: none; width: 110px;"><div class="num">1</div><div class="label">Twin Built</div></div>
+    <div class="metric-box" style="flex: none; width: 110px;"><div class="num">~$3</div><div class="label">One-time Cost</div></div>
+    <div class="metric-box" style="flex: 1;"><div class="num" style="font-size: 14px;">Output: Twin Agent — Sarah Chan (Claims Handler)</div><div class="label">4 Skills: Claim Handling | Email Reply | Reporting | EXCO Prep</div></div>
+  </div>
+
+  <div class="layer-title"><span>Layer 2:</span> Twin Agent Daily Run</div>
+
+  <div class="two-col">
+    <div class="col">
+      <div class="dim1">
+        <div class="dim-title">Dimension #1: Cost Saving</div>
+        <table class="data">
+          <tr><th>Skill</th><th>Frequency</th><th>Cost/Day</th><th>Time Saved/Wk</th></tr>
+          <tr><td>Claim Handling</td><td>8x/day</td><td>$0.18</td><td>5.5 hrs</td></tr>
+          <tr><td>Email Reply</td><td>12x/day</td><td>$0.14</td><td>4.5 hrs</td></tr>
+          <tr><td>Reporting</td><td>2x/month</td><td>$0.03</td><td>2.5 hrs</td></tr>
+          <tr><td>EXCO Prep</td><td>1x/week</td><td>$0.02</td><td>2.0 hrs</td></tr>
+          <tr><td>TOTAL</td><td></td><td>$0.42/day</td><td>14.5 hrs/wk</td></tr>
+        </table>
+        <div style="margin-top: 6px; font-size: 10px; color: #4ade80; font-weight: 600;">
+          Value: $31,320/yr | ROI: 204x | Payback: &lt;1 day
+        </div>
+        <div class="observation">Insight: Each twin has unique cost/saving profile depending on role complexity & frequency</div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="dim2">
+        <div class="dim-title">Dimension #2: Accuracy</div>
+        <table class="data">
+          <tr><th>Skill</th><th>Accuracy</th></tr>
+          <tr><td>Claim Handling</td><td>89%</td></tr>
+          <tr><td>Email Reply</td><td>94%</td></tr>
+          <tr><td>Reporting</td><td>100%</td></tr>
+          <tr><td>EXCO Prep</td><td>88%</td></tr>
+          <tr><td>OVERALL</td><td>91%</td></tr>
+        </table>
+        <div style="margin-top: 6px; font-size: 10px; color: #4ade80;">
+          Day 1: 84% → Day 7: 91% → Day 14: 95% | Edit rate: 40% → 12%
+        </div>
+        <div class="observation">Insight: HITL makes the greatest change — every correction permanently updates Twin Profile</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="remark" style="margin-top: 12px;">
+    ⚠️ 1 built twin (Sarah Chan, Claims). Every twin is different — Marketing = different skills, cost, time-saved. <strong>That's not a limitation; that's #YourTwin≠MyTwin in action.</strong>
+  </div>
+
+  <div class="footer">
+    <span>Iron Faries — Hyperchallenge 2026</span>
+    <span>Page 3 of 4</span>
+  </div>
+</div>
+
+<!-- ==================== PAGE 4: Next Steps & Recommendations ==================== -->
+<div class="slide">
+  <div class="slide-title">Next Steps & <span>Recommendations</span></div>
+  <div class="slide-subtitle">Champions first, then depth, then breadth — reusable agents accelerate every stage</div>
+
+  <div class="full-width-card" style="padding: 14px 20px; margin-bottom: 8px;">
+    <div class="card-title">Roll-Out Plan</div>
+    <div class="arrow-connector">
+      <span class="text">Most diverse twins first</span>
+      <span class="arrow">→</span>
+      <span class="text">All users per team</span>
+      <span class="arrow">→</span>
+      <span class="text">Reuse across BUs/regions</span>
+      <span class="arrow">→</span>
+      <span class="text">Global scale</span>
+    </div>
+    <div class="stage-row">
+      <div class="stage-box s1">
+        <div class="stage-label">Stage 1 — Month 1–2</div>
+        <div class="stage-title">Pilot</div>
+        <div class="stage-detail"><strong>Goal:</strong> Prove works for ANY role on Day 1</div>
+        <div class="stage-detail"><strong>Who:</strong> 2 champions × 8 depts = 16 diverse twins</div>
+      </div>
+      <div class="stage-box s2">
+        <div class="stage-label">Stage 2 — Month 3–6</div>
+        <div class="stage-title">Expand HK</div>
+        <div class="stage-detail"><strong>Goal:</strong> Full adoption, peer training culture</div>
+        <div class="stage-detail"><strong>Who:</strong> ALL users per team. 200+ twins</div>
+      </div>
+      <div class="stage-box s3">
+        <div class="stage-label">Stage 3 — Month 6–12</div>
+        <div class="stage-title">APAC</div>
+        <div class="stage-detail"><strong>Goal:</strong> No rebuild from 0, just adapt. Speed ×10</div>
+        <div class="stage-detail"><strong>Who:</strong> Reuse HK agents across BUs & regions</div>
+      </div>
+      <div class="stage-box s4">
+        <div class="stage-label">Stage 4 — Year 2+</div>
+        <div class="stage-title">Global</div>
+        <div class="stage-detail"><strong>Goal:</strong> Every employee has a twin</div>
+        <div class="stage-detail"><strong>Who:</strong> 55,000 staff. $170M value unlock</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-width-card" style="padding: 12px 20px; margin-bottom: 8px;">
+    <div class="card-title">Scales Affordably</div>
+    <div class="scale-row">
+      <div class="scale-item">
+        <div class="tag">#CheapToBuild</div>
+        <div class="desc">~$3 one-time. No dev needed. Same Factory, ∞ twins.</div>
+      </div>
+      <div class="scale-item">
+        <div class="tag">#CheapToRun</div>
+        <div class="desc">$0.42/day. Built-in coaching → costs drop over time.</div>
+      </div>
+      <div class="scale-item">
+        <div class="tag">#MaxReusability</div>
+        <div class="desc">Built-in agent checks reusability. Max carry-over across roles & regions.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="full-width-card" style="padding: 10px 20px;">
+    <div class="card-title">Risk Mitigation</div>
+    <div class="risk-grid">
+      <div class="risk-item">
+        <div class="risk-label">Risk 1: AI acts without consent</div>
+        <div class="mitigation">→ Human-in-the-loop; nothing moves without approval</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-label">Risk 2: Data exposure</div>
+        <div class="mitigation">→ Security-check agent + PII masking</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-label">Risk 3: Black box</div>
+        <div class="mitigation">→ Full audit trail; every decision logged</div>
+      </div>
+      <div class="risk-item">
+        <div class="risk-label">Risk 4: Disrupts live ops</div>
+        <div class="mitigation">→ 2-week parallel shadow run before go-live</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>Iron Faries — Hyperchallenge 2026</span>
+    <span>Page 4 of 4</span>
+  </div>
+</div>
+
+</body>
+</html>
