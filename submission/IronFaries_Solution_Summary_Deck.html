@@ -18,8 +18,8 @@ body { font-family: 'Segoe UI', -apple-system, sans-serif; }
   overflow: hidden;
   page-break-after: always;
 }
-.slide-onepager .top-row { display: flex; gap: 16px; margin-bottom: 12px; }
-.slide-onepager .second-row { display: flex; gap: 16px; margin-bottom: 12px; }
+.slide-onepager .top-row { display: flex; gap: 12px; margin-bottom: 8px; }
+.slide-onepager .second-row { display: flex; gap: 12px; margin-bottom: 8px; }
 .slide-onepager .box {
   background: white;
   border-radius: 10px;
@@ -248,25 +248,27 @@ function openLightbox(src) {
     <span class="badge-text">Hyperchallenge</span><span class="badge-year">2026</span>
   </div>
 
+  <!-- Top Row: Name + Use Case + Team Members in 1 row -->
   <div class="top-row">
     <div class="box">
       <div class="box-label">Name of the Team</div>
       <div class="box-value">Iron Faries</div>
     </div>
-    <div class="box">
+    <div class="box" style="flex: 2;">
       <div class="box-label">BYO Use Case</div>
       <div class="box-value">Digital Twin Factory — An Agent That Builds Agents</div>
     </div>
-  </div>
-
-  <div class="second-row">
     <div class="box">
       <div class="box-label">Team Members</div>
       <div class="box-value">Gigi Ma, gigi.ma@zurich.com</div>
     </div>
-    <div class="box">
+  </div>
+
+  <!-- Second Row: Main Learning (full width, 2-column) -->
+  <div class="second-row">
+    <div class="box" style="flex: 1;">
       <div class="box-label">Main learning from experience</div>
-      <ul class="content-list" style="font-size: 10px;">
+      <ul class="content-list" style="font-size: 10px; columns: 2; column-gap: 24px;">
         <li><span class="hashtag">#ArchitectureFirst</span> — 3 options evaluated; the "obvious" approach was 6x more expensive. Design structure before features.</li>
         <li><span class="hashtag">#AgenticThinking</span> — Reason → Plan → Decide → Self-Correct. A learnable, repeatable framework — not magic.</li>
         <li><span class="hashtag">#GoodAgentCriteria</span> — Reusability, token efficiency, security, human approval, self-improvement. Without scoring these, agents can't scale.</li>
