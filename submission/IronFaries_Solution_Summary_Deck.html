@@ -198,9 +198,48 @@ table.data tr:last-child td { border-bottom: none; font-weight: 700; color: #4ad
   padding: 14px 20px;
   margin-bottom: 10px;
 }
+
+.screencap {
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-width: 100%;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.screencap:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 20px rgba(0,200,230,0.3);
+}
+
+.lightbox-overlay {
+  display: none;
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.92);
+  z-index: 9999;
+  justify-content: center; align-items: center;
+  cursor: pointer;
+}
+.lightbox-overlay.active { display: flex; }
+.lightbox-overlay img {
+  max-width: 90%; max-height: 90%;
+  border-radius: 12px;
+  box-shadow: 0 8px 40px rgba(0,200,230,0.4);
+}
 </style>
 </head>
 <body>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" onclick="this.classList.remove('active')">
+  <img id="lightbox-img" src="" />
+</div>
+<script>
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+}
+</script>
 
 <!-- ==================== PAGE 1: ONE-PAGER (Light Theme) ==================== -->
 <div class="slide-onepager">
@@ -377,6 +416,21 @@ table.data tr:last-child td { border-bottom: none; font-weight: 700; color: #4ad
           <tr><td style="color: #4ade80; font-weight: 700;">C: Orchestrated Skills</td><td style="color: #4ade80; font-weight: 700;">94/100</td><td style="color: #4ade80;">$0.42/day, testable, governance built-in</td></tr>
         </table>
       </div>
+      <!-- Supporting visuals -->
+      <div style="display: flex; gap: 8px; margin-top: 10px;">
+        <div style="flex: 1; text-align: center;">
+          <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide1.png" class="screencap" style="height: 105px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge" />
+          <div style="font-size: 7.5px; color: #7aa3c8; margin-top: 2px;">Agent That Builds Agents</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide5.png" class="screencap" style="height: 105px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge" />
+          <div style="font-size: 7.5px; color: #7aa3c8; margin-top: 2px;">5 Winning Themes</div>
+        </div>
+        <div style="flex: 1; text-align: center;">
+          <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide8.png" class="screencap" style="height: 105px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge" />
+          <div style="font-size: 7.5px; color: #7aa3c8; margin-top: 2px;">Truly Agentic (Level 5)</div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -438,7 +492,19 @@ table.data tr:last-child td { border-bottom: none; font-weight: 700; color: #4ad
     </div>
   </div>
 
-  <div class="remark" style="margin-top: 12px;">
+  <!-- Supporting visuals -->
+  <div style="display: flex; gap: 16px; margin-top: 14px; justify-content: center;">
+    <div style="text-align: center;">
+      <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide2.png" class="screencap" style="height: 90px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge: Cost-Smart Architecture" />
+      <div style="font-size: 8px; color: #7aa3c8; margin-top: 2px;">Cost-Smart Architecture (Dim #1)</div>
+    </div>
+    <div style="text-align: center;">
+      <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide4.png" class="screencap" style="height: 90px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge: Easy Feedback" />
+      <div style="font-size: 8px; color: #7aa3c8; margin-top: 2px;">Easy Feedback — Skills Learn (Dim #2)</div>
+    </div>
+  </div>
+
+  <div class="remark" style="margin-top: 8px;">
     ⚠️ 1 built twin (Sarah Chan, Claims). Every twin is different — Marketing = different skills, cost, time-saved. <strong>That's not a limitation; that's #YourTwin≠MyTwin in action.</strong>
   </div>
 
@@ -489,6 +555,11 @@ table.data tr:last-child td { border-bottom: none; font-weight: 700; color: #4ad
         <div class="stage-detail"><strong>Goal:</strong> Every employee has a twin</div>
         <div class="stage-detail"><strong>Who:</strong> 55,000 staff. $170M value unlock</div>
       </div>
+    </div>
+    <!-- Supporting visual -->
+    <div style="text-align: center; margin-top: 8px;">
+      <img src="https://raw.githubusercontent.com/gigi-ma-new/BYO_DigitalTwinFactory_IronFaries/main/final_slides/slide3.png" class="screencap" style="height: 100px; object-fit: contain;" onclick="openLightbox(this.src)" title="Click to enlarge: Your Twin ≠ My Twin" />
+      <div style="font-size: 8px; color: #7aa3c8; margin-top: 2px;">Your Twin ≠ My Twin — Same Factory, different outputs per role</div>
     </div>
   </div>
 
