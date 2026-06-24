@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Digital Twin Factory - 8 Slides Text Layout</title>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { background: #f0f0f0; font-family: 'Inter', sans-serif; }
+
+.slide {
+  width: 1920px;
+  height: 1080px;
+  margin: 40px auto;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  transform: scale(0.75);
+  transform-origin: top center;
+  margin-bottom: -250px;
+  background: #fefefe;
+  background-image:
+    radial-gradient(circle, #e8edf5 1px, transparent 1px);
+  background-size: 40px 40px;
+  border: 3px solid #c8d4e8;
+  border-radius: 18px;
+  box-shadow: 6px 6px 0px #e0e6f0, 0 0 40px rgba(0,51,153,0.04);
+}
+
+.slide::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border: 2px dashed rgba(0,176,202,0.15);
+  border-radius: 18px;
+  margin: 12px;
+  pointer-events: none;
+}
+
+.slide-title {
+  font-family: 'Caveat', cursive;
+  font-size: 64px;
+  font-weight: 700;
+  color: #003399;
+  text-align: center;
+  padding-top: 25px;
+}
+
+.slide-subtitle {
+  font-family: 'Caveat', cursive;
+  font-size: 44px;
+  color: #00B0CA;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 25px;
+}
+
+.slide-number {
+  position: absolute;
+  top: 15px;
+  right: 30px;
+  font-size: 14px;
+  color: #999;
+  font-family: 'Caveat', cursive;
+  font-size: 20px;
+}
+
+.takeaway {
+  font-family: 'Caveat', cursive;
+  font-size: 48px;
+  color: #00B0CA;
+  text-align: center;
+  margin-top: 80px;
+}
+
+/* Hand-drawn section box */
+.hd-section {
+  border: 1.5px solid #b8c8e0;
+  border-radius: 12px;
+  padding: 18px 22px;
+  background: rgba(255,255,255,0.6);
+  position: relative;
+}
+.hd-section.blue { border-color: #003399; }
+.hd-section.cyan { border-color: #00B0CA; }
+.hd-section.green { border-color: #28A745; }
+.hd-section.orange { border-color: #E67E22; }
+.hd-section.gold { border-color: #D4A017; }
+
+/* Hand-drawn card style */
+.hd-card {
+  border: 2.5px solid #003399;
+  border-radius: 14px;
+  padding: 15px 20px;
+  background: rgba(255,255,255,0.85);
+  box-shadow: 3px 3px 0px rgba(0,51,153,0.1);
+  position: relative;
+}
+.hd-card.cyan { border-color: #00B0CA; box-shadow: 3px 3px 0px rgba(0,176,202,0.1); }
+.hd-card.green { border-color: #28A745; box-shadow: 3px 3px 0px rgba(40,167,69,0.1); }
+.hd-card.orange { border-color: #E67E22; box-shadow: 3px 3px 0px rgba(230,126,34,0.1); }
+.hd-card.gold { border-color: #D4A017; box-shadow: 3px 3px 0px rgba(212,160,23,0.1); }
+
+.hd-pill {
+  display: inline-block;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 3px 4px;
+}
+.hd-pill.blue { background: #e8eef8; color: #003399; }
+.hd-pill.cyan { background: #e0f7fa; color: #00838f; }
+.hd-pill.green { background: #e8f5e9; color: #2e7d32; }
+.hd-pill.orange { background: #fff3e0; color: #e65100; }
+.hd-pill.gold { background: #fff8e1; color: #f57f17; }
+
+/* Hand-drawn arrows */
+.hd-arrow {
+  font-family: 'Caveat', cursive;
+  font-size: 36px;
+  color: #003399;
+  text-align: center;
+  filter: url(#sketchy);
+}
+.hd-arrow-down {
+  text-align: center;
+  margin: 8px 0;
+  position: relative;
+}
+.hd-arrow-down::after {
+  content: '';
+  display: block;
+  width: 2.5px;
+  height: 40px;
+  background: #003399;
+  margin: 0 auto;
+  border-radius: 2px;
+  filter: url(#sketchy);
+}
+.hd-arrow-down::before {
+  content: '▼';
+  display: block;
+  font-size: 18px;
+  color: #003399;
+  margin-top: -2px;
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.hd-arrow-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+}
+.hd-arrow-right::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 2.5px;
+  background: #003399;
+  border-radius: 2px;
+  position: relative;
+  filter: url(#sketchy);
+}
+.hd-arrow-right::before {
+  content: '▶';
+  font-size: 14px;
+  color: #003399;
+  position: absolute;
+  right: -2px;
+}
+
+/* SVG arrows get wobbly filter */
+.arrow-svg {
+  filter: url(#sketchy);
+}
+.hd-arrow {
+  filter: url(#sketchy);
+}
+.arrow-svg path {
+  fill: none;
+  stroke: #003399;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.arrow-svg.cyan path { stroke: #00B0CA; }
+.arrow-svg.green path { stroke: #28A745; }
+.arrow-svg.orange path { stroke: #E67E22; }
+</style>
+</head>
+<body>
+
+<!-- SVG filter for hand-drawn wobbly effect -->
+<svg width="0" height="0" style="position:absolute;">
+  <defs>
+    <filter id="sketchy" x="-5%" y="-5%" width="110%" height="110%">
+      <feTurbulence type="turbulence" baseFrequency="0.015" numOctaves="3" seed="2" result="noise"/>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="1.5" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+  </defs>
+</svg>
+
+<!-- ============================================
+     SLIDE 1: An Agent That Builds Agents
+     ============================================ -->
+<div class="slide" id="slide1">
+  <span class="slide-number">1 / 8</span>
+  <div class="slide-title">An Agent That Builds Agents</div>
+  <div class="slide-subtitle">Your twin tailored to your day-to-day — in 10 minutes, just by talking</div>
+
+  <!-- INPUT → FACTORY → OUTPUT -->
+  <div style="display:flex; align-items:stretch; margin:20px 40px; gap:0;">
+    <!-- INPUT -->
+    <div class="hd-section blue" style="width:200px; padding:15px;">
+      <div style="font-size:20px; font-weight:700; color:#003399;">INPUT</div>
+      <div style="font-size:15px; color:#343A40; margin-top:10px; line-height:1.7; padding-left:5px;">
+        • Voice notes<br>
+        • Job shadow recordings<br>
+        • SOPs &amp; process flows<br>
+        • JD documents<br>
+        <b style="color:#003399">• Talk naturally like training a new hire</b>
+      </div>
+    </div>
+
+    <!-- Arrow → with label -->
+    <svg class="arrow-svg" width="50" height="100" viewBox="0 0 50 100" style="align-self:center;flex-shrink:0;">
+      <path d="M5,50 C15,48 30,52 40,50"/>
+      <path d="M34,44 L42,50 L34,56"/>
+      <text x="2" y="35" font-family="Caveat, cursive" font-size="14" fill="#003399" font-weight="700">feeds</text>
+    </svg>
+
+    <!-- FACTORY -->
+    <div class="hd-section blue" style="flex:1; padding:15px 20px;">
+      <div style="font-size:26px; font-weight:700; color:#003399;">DIGITAL TWIN FACTORY <span style="color:#00B0CA">— 11 Agents</span></div>
+      <div style="font-size:15px; color:#666; margin-top:3px;">One-time run. No coding. Just talk.</div>
+
+      <!-- Agent 11 top -->
+      <div style="background:#f0f7ff; border:2px solid #003399; border-radius:8px; padding:6px 15px; margin:10px 0; text-align:center;">
+        <span style="font-size:15px; font-weight:700; color:#003399;">Agent 11: ORCHESTRATOR</span>
+        <span style="font-size:13px; color:#666;"> — coordinates all, manages dependencies, re-routes on failure</span>
+      </div>
+
+      <!-- Phases with agent goals underneath -->
+      <div style="display:flex; gap:15px; margin-top:8px;">
+        <!-- UNDERSTAND -->
+        <div style="flex:1; border:1px solid #28A745; border-radius:8px; padding:8px;">
+          <div style="font-size:14px; font-weight:700; color:#28A745; text-transform:uppercase; margin-bottom:5px;">UNDERSTAND</div>
+          <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+            <b>1 Understanding-You</b><br>
+            <span style="padding-left:10px; color:#666;">• Extracts role profile</span><br>
+            <b>2 Process Streamliner</b><br>
+            <span style="padding-left:10px; color:#666;">• Finds waste in SOPs</span>
+          </div>
+        </div>
+        <!-- DESIGN -->
+        <div style="flex:1; border:1px solid #003399; border-radius:8px; padding:8px;">
+          <div style="font-size:14px; font-weight:700; color:#003399; text-transform:uppercase; margin-bottom:5px;">DESIGN</div>
+          <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+            <b>3 Architect</b><br>
+            <span style="padding-left:10px; color:#666;">• Designs 3 scored options</span><br>
+            <b>4 Explainer</b><br>
+            <span style="padding-left:10px; color:#666;">• Makes reasoning clear</span><br>
+            <b>5 Quality Assessor</b><br>
+            <span style="padding-left:10px; color:#666;">• Enterprise standards</span>
+          </div>
+        </div>
+        <!-- BUILD -->
+        <div style="flex:1.3; border:1px solid #00B0CA; border-radius:8px; padding:8px;">
+          <div style="font-size:14px; font-weight:700; color:#00B0CA; text-transform:uppercase; margin-bottom:5px;">BUILD</div>
+          <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+            <b>6 Builder</b><br>
+            <span style="padding-left:10px; color:#666;">• Constructs twin skeleton</span><br>
+            <b>7 Cost Observer</b><br>
+            <span style="padding-left:10px; color:#666;">• Projects ROI</span><br>
+            <b>8 Profile Writer</b><br>
+            <span style="padding-left:10px; color:#666;">• Self-improving memory</span><br>
+            <b>9 Skill Constructor</b><br>
+            <span style="padding-left:10px; color:#666;">• Designs reasoning chains</span>
+          </div>
+        </div>
+        <!-- VALIDATE -->
+        <div style="flex:1; border:1px solid #28A745; border-radius:8px; padding:8px;">
+          <div style="font-size:14px; font-weight:700; color:#28A745; text-transform:uppercase; margin-bottom:5px;">VALIDATE</div>
+          <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+            <b>10 Parallel Run</b><br>
+            <span style="padding-left:10px; color:#666;">• Tests accuracy in shadow</span>
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size:15px; color:#343A40; font-style:italic; margin-top:10px;">Runs once. 10 min. Re-run only if new job scope or process change.</div>
+    </div>
+
+    <!-- Arrow → with label -->
+    <svg class="arrow-svg" width="50" height="100" viewBox="0 0 50 100" style="align-self:center;flex-shrink:0;">
+      <path d="M5,50 C15,48 30,52 40,50"/>
+      <path d="M34,44 L42,50 L34,56"/>
+      <text x="2" y="35" font-family="Caveat, cursive" font-size="14" fill="#28A745" font-weight="700">builds</text>
+    </svg>
+
+    <!-- OUTPUT -->
+    <div class="hd-section green" style="width:200px; padding:15px;">
+      <div style="font-size:20px; font-weight:700; color:#28A745;">OUTPUT</div>
+      <div style="font-size:15px; color:#343A40; margin-top:10px; line-height:1.7;">
+        Your Personal<br>Digital Twin<br><br>
+        <i style="color:#666">Ready to run daily</i>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hand-drawn down arrow with label -->
+  <div style="text-align:center; margin:5px 0;">
+    <svg class="arrow-svg" width="300" height="55" viewBox="0 0 300 55" style="display:inline-block;vertical-align:middle;">
+      <path d="M150,5 C148,18 152,30 150,42"/>
+      <path d="M144,36 L150,47 L156,36"/>
+      <text x="168" y="35" font-family="Caveat, cursive" font-size="28" fill="#003399" font-weight="700">PRODUCES</text>
+    </svg>
+  </div>
+
+  <div style="display:flex; justify-content:space-around; margin:10px 100px;">
+    <div class="hd-section blue" style="text-align:center; padding:15px 40px;">
+      <div style="font-size:24px; font-weight:700; color:#003399;">My Digital Twin</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;"><b>Claims</b> | <b>Email</b> | <b>Reports</b> | <b>Boss Prep</b></div>
+      <div style="font-size:14px; color:#666; margin-top:3px; font-style:italic;">4 skills for my 4 daily tasks</div>
+    </div>
+    <div class="hd-section cyan" style="text-align:center; padding:15px 40px;">
+      <div style="font-size:24px; font-weight:700; color:#00B0CA;">Your Digital Twin</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;"><b>Skill 1</b> | <b>Skill 2</b> | <b>Skill 3</b> | <b>Skill N...</b></div>
+      <div style="font-size:14px; color:#666; margin-top:3px; font-style:italic;">Your twin, tailored to YOUR day-to-day</div>
+    </div>
+  </div>
+
+  <div class="takeaway" style="margin-top:15px;">What if 55,000 staff globally each had their own twin — triple productivity.</div>
+</div>
+
+<!-- ============================================
+     SLIDE 2: Cost-Smart Architecture
+     ============================================ -->
+<div class="slide" id="slide2">
+  <span class="slide-number">2 / 8</span>
+  <div class="slide-title">Cost-Smart Architecture</div>
+  <div class="slide-subtitle">Brain + Body — less than a coffee a day</div>
+
+  <!-- Triangle: Layer 1 (left) | Layer 2 (right) -->
+  <div style="display:flex; gap:30px; margin:25px 80px; align-items:stretch;">
+    <!-- Layer 1 -->
+    <div class="hd-section blue" style="flex:1; padding:20px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">LAYER 1 — Digital Twin Factory Agent</div>
+      <div style="font-size:18px; margin-top:12px; line-height:1.7; color:#343A40;">
+        <p>UNDERSTAND → DESIGN → BUILD → VALIDATE</p>
+        <p style="margin-top:8px"><b style="color:#003399">Brain (Claude only)</b> — pure reasoning</p>
+        <p style="margin-top:8px; color:#666; font-style:italic">Runs once, 10 minutes</p>
+      </div>
+    </div>
+
+    <!-- Arrow → with label -->
+    <svg class="arrow-svg" width="90" height="110" viewBox="0 0 90 110" style="align-self:center;flex-shrink:0;">
+      <path d="M10,60 C25,56 55,64 75,60"/>
+      <path d="M67,53 L78,60 L67,67"/>
+      <text x="10" y="40" font-family="Caveat, cursive" font-size="24" fill="#003399" font-weight="700">produces</text>
+    </svg>
+
+    <!-- Layer 2 -->
+    <div class="hd-section cyan" style="flex:1; padding:20px;">
+      <div style="font-size:22px; font-weight:700; color:#00B0CA;">LAYER 2 — Your Twin Agent Created</div>
+      <div style="font-size:18px; margin-top:12px; line-height:1.7; color:#343A40;">
+        <p><b style="color:#003399">Brain (Claude)</b> — called ONLY when thinking needed</p>
+        <p style="margin-top:8px"><b style="color:#00B0CA">Body (n8n)</b> — FREE orchestration, 400+ connectors</p>
+        <p style="margin-top:8px">Triggers, scheduling, routing</p>
+        <p style="margin-top:8px; color:#666; font-style:italic">Runs daily, automated</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Arrows down to Twin Profile with label -->
+  <svg class="arrow-svg" width="400" height="50" viewBox="0 0 400 50" style="display:block;margin:0 auto;">
+    <path d="M100,5 C120,18 150,30 200,42"/>
+    <path d="M300,5 C280,18 250,30 200,42"/>
+    <path d="M194,36 L200,46 L206,36"/>
+    <text x="135" y="18" font-family="Caveat, cursive" font-size="24" fill="#00B0CA" font-weight="700">both feed into</text>
+  </svg>
+
+  <!-- Twin Profile (center, lower = triangle) -->
+  <div class="hd-section cyan" style="text-align:center; margin:5px auto; max-width:500px; padding:15px;">
+    <div style="font-size:22px; font-weight:700; color:#00B0CA;">TWIN PROFILE</div>
+    <div style="font-size:16px; margin-top:8px; color:#343A40; line-height:1.5;">
+      <b>Self-Improving Memory</b><br>
+      Stores all feedback &nbsp;|&nbsp; All skills read it &nbsp;|&nbsp; Behaviour changes instantly
+    </div>
+    <div style="font-size:14px; color:#666; font-style:italic; margin-top:5px;">Gets smarter every day</div>
+  </div>
+
+  <!-- Cost bar chart -->
+  <div class="hd-section" style="margin:30px 120px 15px;">
+    <div style="font-size:18px; font-weight:700; margin-bottom:15px; color:#343A40;">Daily Cost Comparison</div>
+    <div style="display:flex; align-items:center; margin-bottom:12px;">
+      <div style="width:180px; font-size:16px; color:#E67E22; font-weight:600;">Naive All-Claude</div>
+      <div style="flex:1; position:relative; height:36px;">
+        <div style="width:85%; height:100%; background:linear-gradient(90deg, #E67E22, #e74c3c); border-radius:6px;"></div>
+        <span style="position:absolute; right:calc(15% + 10px); top:8px; font-size:16px; font-weight:700; color:white;">$2.80/day</span>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; margin-bottom:12px;">
+      <div style="width:180px; font-size:16px; color:#28A745; font-weight:600;">Smart n8n + Claude</div>
+      <div style="flex:1; position:relative; height:36px;">
+        <div style="width:15%; height:100%; background:linear-gradient(90deg, #28A745, #20c997); border-radius:6px;"></div>
+        <span style="position:absolute; left:calc(15% + 10px); top:8px; font-size:16px; font-weight:700; color:#28A745;">$0.42/day</span>
+      </div>
+    </div>
+    <div style="text-align:right; font-size:20px; font-weight:700; color:#28A745; margin-top:5px;">85% cheaper ↓</div>
+  </div>
+
+  <div style="text-align:center; margin:15px 80px; font-size:18px; color:#343A40;">
+    <b>Why it gets cheaper over time:</b>&nbsp;&nbsp;
+    Coaches better prompting &nbsp;|&nbsp; Profile reduces back-and-forth &nbsp;|&nbsp; Accuracy means fewer retries
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 3: Your Twin Is Not My Twin
+     ============================================ -->
+<div class="slide" id="slide3">
+  <span class="slide-number">3 / 8</span>
+  <div class="slide-title">Your Twin Is Not My Twin</div>
+  <div class="slide-subtitle">Same Factory — completely different output for every role</div>
+
+  <div class="hd-section blue" style="text-align:center; margin:15px 200px; padding:12px 30px;">
+    <div style="font-size:22px; font-weight:700; color:#003399;">SAME FACTORY — 11 Agents, no coding, just talk</div>
+  </div>
+
+  <!-- Label above arrows -->
+  <div style="text-align:center; margin:5px 0; font-family:'Caveat',cursive; font-size:28px; color:#00B0CA; font-weight:700;">↓ Creates ANY Digital Twin ↓</div>
+  <!-- Fan arrows down (clean, no overlap) -->
+  <svg class="arrow-svg" width="800" height="40" viewBox="0 0 800 40" style="display:block;margin:0 auto;">
+    <path d="M400,2 L120,35"/><path d="M123,27 L118,37 L130,33"/>
+    <path d="M400,2 L260,35"/><path d="M263,27 L258,37 L270,33"/>
+    <path d="M400,2 L400,35"/><path d="M395,29 L400,37 L405,29"/>
+    <path d="M400,2 L540,35"/><path d="M537,33 L542,37 L537,27"/>
+    <path d="M400,2 L680,35"/><path d="M677,33 L682,37 L675,27"/>
+  </svg>
+
+  <div style="display:flex; justify-content:center; gap:20px; margin:10px 50px;">
+    <div class="hd-section blue" style="text-align:center; width:280px; padding:12px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">Claims Twin</div>
+      <div style="font-size:16px; color:#00B0CA; font-weight:600;">4 Skills</div>
+      <div style="font-size:16px; color:#343A40; line-height:1.5; margin-top:5px;">Claim Handling<br>Email Reply<br>Boss Prep<br>Reports</div>
+    </div>
+    <div class="hd-section blue" style="text-align:center; width:280px; padding:12px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">UW Twin</div>
+      <div style="font-size:16px; color:#00B0CA; font-weight:600;">4 Skills</div>
+      <div style="font-size:16px; color:#343A40; line-height:1.5; margin-top:5px;">Risk Assessment<br>Pricing<br>Triage<br>Broker Comms</div>
+    </div>
+    <div class="hd-section cyan" style="text-align:center; width:280px; padding:12px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">Finance Twin</div>
+      <div style="font-size:16px; color:#00B0CA; font-weight:600;">3 Skills</div>
+      <div style="font-size:16px; color:#343A40; line-height:1.5; margin-top:5px;">Reconciliation<br>Month-End<br>Budget</div>
+    </div>
+    <div class="hd-section cyan" style="text-align:center; width:280px; padding:12px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">Renewal Twin</div>
+      <div style="font-size:16px; color:#00B0CA; font-weight:600;">5 Skills</div>
+      <div style="font-size:16px; color:#343A40; line-height:1.5; margin-top:5px;">Expiry Tracking<br>Retention<br>Variance<br>Re-quote<br>Lapse Risk</div>
+    </div>
+    <div class="hd-section green" style="text-align:center; width:280px; padding:12px;">
+      <div style="font-size:22px; font-weight:700; color:#003399;">Marketing Twin</div>
+      <div style="font-size:16px; color:#00B0CA; font-weight:600;">5 Skills</div>
+      <div style="font-size:16px; color:#343A40; line-height:1.5; margin-top:5px;">Campaign<br>Content<br>Analytics<br>Events<br>Social</div>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:10px; font-size:16px; color:#666;">+ Acquisition, CS, HR, Operations...</div>
+
+  <div class="takeaway" style="margin-top:20px; font-size:38px;">Same factory input — completely different twin output — tailored to THEIR day-to-day</div>
+</div>
+
+<!-- ============================================
+     SLIDE 4: Easy Feedback, Skills Learn and Grow
+     ============================================ -->
+<div class="slide" id="slide4">
+  <span class="slide-number">4 / 8</span>
+  <div class="slide-title">Easy Feedback — Skills Learn and Grow</div>
+  <div class="slide-subtitle">Two ways to teach your twin — it never repeats mistakes — grows with your career</div>
+
+  <!-- USER top center with arrows to Tab 3 & 4 -->
+  <div style="text-align:center; margin:10px 0 0;">
+    <span style="font-size:18px; font-weight:700; color:#003399; border:2px solid #003399; border-radius:20px; padding:5px 20px;">&#x1F464; USER</span>
+  </div>
+  <!-- Arrows from USER to both tabs -->
+  <svg class="arrow-svg" width="600" height="40" viewBox="0 0 600 40" style="display:block;margin:0 auto;">
+    <path d="M300,5 C250,12 200,20 150,35"/><path d="M153,27 L148,37 L158,34"/>
+    <path d="M300,5 C350,12 400,20 450,35"/><path d="M447,27 L452,37 L442,34"/>
+    <text x="160" y="18" font-family="Caveat, cursive" font-size="22" fill="#003399" font-weight="700">interact</text>
+    <text x="385" y="18" font-family="Caveat, cursive" font-size="22" fill="#E67E22" font-weight="700">interact</text>
+  </svg>
+
+  <!-- Tab 3 + Tab 4 compact (tight padding, no empty space) -->
+  <div style="display:flex; gap:30px; margin:0px 80px;">
+    <!-- Tab 3 -->
+    <div class="hd-section blue" style="flex:1; padding:12px 15px;">
+      <div style="font-size:18px; font-weight:700; color:#003399; margin-bottom:5px;">💬 Tab 3 — Talk to My Twin</div>
+      <div style="font-size:14px; color:#343A40; line-height:1.5;">
+        <b>"Always do something"</b> — e.g. EXCO-style bullets for boss<br>
+        <b>"Never do something"</b> — e.g. Never include customer PII<br>
+        <b>"New skill needed"</b> — e.g. Got promoted, create audit skill<br>
+        <b>"Update existing skill"</b> — e.g. New claim system rollout
+      </div>
+      <div style="font-size:12px; font-style:italic; color:#666; margin-top:5px;">No Factory re-run needed — expandable, grows with you</div>
+    </div>
+    <!-- Tab 4 -->
+    <div class="hd-section orange" style="flex:1; padding:12px 15px;">
+      <div style="font-size:18px; font-weight:700; color:#E67E22; margin-bottom:5px;">📋 Tab 4 — Approve on Skill Output</div>
+      <div style="font-size:14px; color:#343A40; line-height:1.6;">
+        Agent delivers draft, then you choose:<br>
+        <span style="color:#28A745; font-weight:700; font-size:16px;">✓ Approve</span> — send as-is<br>
+        <span style="color:#E67E22; font-weight:700; font-size:16px;">✎ Edit</span> — upload template or leave note<br>
+        <span style="color:#dc3545; font-weight:700; font-size:16px;">✗ Reject</span> — teach what went wrong
+      </div>
+      <div style="font-size:12px; font-style:italic; color:#666; margin-top:5px;">Every correction permanently trains your twin</div>
+    </div>
+  </div>
+
+  <!-- Arrows down to Twin Profile with label -->
+  <svg class="arrow-svg cyan" width="500" height="45" viewBox="0 0 500 45" style="display:block;margin:0 auto;">
+    <path d="M150,5 C170,15 210,28 250,38"/>
+    <path d="M350,5 C330,15 290,28 250,38"/>
+    <path d="M244,32 L250,42 L256,32"/>
+    <text x="160" y="18" font-family="Caveat, cursive" font-size="24" fill="#00B0CA" font-weight="700">feeds into profile</text>
+  </svg>
+
+  <!-- Twin Profile bottom center -->
+  <div class="hd-section cyan" style="text-align:center; margin:3px auto; max-width:500px; padding:10px;">
+    <div style="font-size:18px; font-weight:700; color:#00B0CA;">🧠 TWIN PROFILE — Gets Smarter Every Day</div>
+    <div style="font-size:14px; margin-top:3px; color:#343A40;">
+      Stored permanently &nbsp;|&nbsp; All skills read it &nbsp;|&nbsp; Behaviour changes instantly
+    </div>
+  </div>
+
+  <!-- Accuracy + Edit Rate as 2 graph sections (boxed) -->
+  <div style="display:flex; gap:25px; margin:10px 120px;">
+    <!-- Accuracy graph -->
+    <div class="hd-section green" style="flex:1; padding:15px;">
+      <div style="font-size:16px; font-weight:700; color:#343A40; margin-bottom:10px;">📈 Accuracy Over Time</div>
+      <div style="display:flex; align-items:flex-end; gap:20px; height:100px;">
+        <div style="text-align:center;">
+          <div style="width:60px; height:42px; background:#E67E22; border-radius:4px 4px 0 0;"></div>
+          <div style="font-size:12px; margin-top:3px;">Day 1</div>
+          <div style="font-size:14px; font-weight:700;">84%</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:60px; height:65px; background:#00B0CA; border-radius:4px 4px 0 0;"></div>
+          <div style="font-size:12px; margin-top:3px;">Week 2</div>
+          <div style="font-size:14px; font-weight:700;">91%</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:60px; height:85px; background:#28A745; border-radius:4px 4px 0 0;"></div>
+          <div style="font-size:12px; margin-top:3px;">Month 1</div>
+          <div style="font-size:14px; font-weight:700;">95%</div>
+        </div>
+      </div>
+    </div>
+    <!-- Edit Rate graph -->
+    <div class="hd-section orange" style="flex:1; padding:15px;">
+      <div style="font-size:16px; font-weight:700; color:#343A40; margin-bottom:10px;">📉 Edit Rate Reduction</div>
+      <div style="display:flex; align-items:flex-end; gap:30px; height:100px;">
+        <div style="text-align:center;">
+          <div style="width:80px; height:80px; background:#E67E22; border-radius:4px 4px 0 0;"></div>
+          <div style="font-size:12px; margin-top:3px;">Before</div>
+          <div style="font-size:14px; font-weight:700;">40%</div>
+        </div>
+        <div style="text-align:center;">
+          <div style="width:80px; height:24px; background:#28A745; border-radius:4px 4px 0 0;"></div>
+          <div style="font-size:12px; margin-top:3px;">After 5 corrections</div>
+          <div style="font-size:14px; font-weight:700; color:#28A745;">12%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Takeaway -->
+  <div class="takeaway" style="margin-top:20px;">Your twin could save even more than mine — built entirely around YOUR day</div>
+</div>
+
+<!-- ============================================
+     SLIDE 5: 5 Winning Themes Endcard
+     ============================================ -->
+<div class="slide" id="slide5">
+  <span class="slide-number">5 / 8</span>
+  <div class="slide-title">Digital Twin Factory — 5 Winning Themes</div>
+
+  <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:25px; margin:35px 80px;">
+    <div class="hd-section blue" style="padding:18px;">
+      <div style="font-size:14px; font-weight:700; color:#003399; text-transform:uppercase;">THEME 1</div>
+      <div style="font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#003399;">Agent That Builds Agents</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;">11 agents collaborate to design your unique twin in <b>10 minutes</b></div>
+    </div>
+    <div class="hd-section cyan" style="padding:18px;">
+      <div style="font-size:14px; font-weight:700; color:#00B0CA; text-transform:uppercase;">THEME 2</div>
+      <div style="font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#00B0CA;">Cost-Smart 2-Layer</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;">Claude brain (once) + n8n body (daily) = <b>less than 1/3 cost</b></div>
+    </div>
+    <div class="hd-section blue" style="padding:18px;">
+      <div style="font-size:14px; font-weight:700; color:#003399; text-transform:uppercase;">THEME 3</div>
+      <div style="font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#003399;">Your Twin Not My Twin</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;">Same factory, <b>completely different skills</b> per role</div>
+    </div>
+  </div>
+
+  <div style="display:flex; justify-content:center; gap:80px; margin:20px 80px;">
+    <div class="hd-section gold" style="padding:18px;">
+      <div style="font-size:14px; font-weight:700; color:#D4A017; text-transform:uppercase;">THEME 4</div>
+      <div style="font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#D4A017;">Easy Feedback, Skills Learn</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;">Approve / Edit / Reject — twin <b>never repeats mistakes</b></div>
+    </div>
+    <div class="hd-section green" style="padding:18px;">
+      <div style="font-size:14px; font-weight:700; color:#28A745; text-transform:uppercase;">THEME 5</div>
+      <div style="font-family:'Caveat',cursive; font-size:30px; font-weight:700; color:#28A745;">Expandable, Grows With You</div>
+      <div style="font-size:16px; color:#343A40; margin-top:5px;">Promoted? Just ask — <b>new skill instantly</b>, no rebuild</div>
+    </div>
+  </div>
+
+  <!-- Takeaway - bigger, title font style -->
+  <div style="text-align:center; margin-top:80px;">
+    <div style="font-family:'Caveat',cursive; font-size:52px; font-weight:700; color:#003399;">An agent that creates agents. Same factory, different you, different twin.</div>
+    <div style="font-family:'Caveat',cursive; font-size:44px; color:#00B0CA; margin-top:5px;">55,000 staff globally — imagine every one with their own twin.</div>
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 6: Process Map — 11 Agents
+     ============================================ -->
+<div class="slide" id="slide6">
+  <span class="slide-number">6 / 8</span>
+  <div class="slide-title">Digital Twin Factory — Process Map</div>
+  <div class="slide-subtitle">11 Agents in 4 Phases — Orchestrator coordinates — Human validates every phase</div>
+
+  <div class="hd-section blue" style="text-align:center; margin:8px 300px; padding:8px 20px;">
+    <span style="font-weight:700; color:#003399;">Agent 11: ORCHESTRATOR</span> — Coordinates all | Manages dependencies | Re-routes on failure
+  </div>
+
+  <div style="display:flex; margin:10px 30px; gap:0; align-items:stretch;">
+    <!-- INPUT -->
+    <div class="hd-section blue" style="width:170px; padding:10px;">
+      <div style="font-size:18px; font-weight:700; color:#003399;">INPUT</div>
+      <div style="font-size:14px; color:#343A40; margin-top:8px; line-height:1.6; padding-left:5px;">
+        • Voice notes<br>
+        • Job shadow recordings<br>
+        • SOPs &amp; process flows<br>
+        • JD documents<br>
+        <b style="color:#003399;">• Talk naturally</b>
+      </div>
+    </div>
+
+    <svg class="arrow-svg" width="35" height="80" viewBox="0 0 35 80" style="align-self:center;flex-shrink:0;"><path d="M5,40 C12,38 20,42 28,40"/><path d="M22,35 L30,40 L22,45"/></svg>
+
+    <!-- 4 Phases -->
+    <div style="flex:1; display:flex; gap:0; align-items:stretch;">
+      <div class="hd-section blue" style="flex:1; padding:8px; margin:0 3px;">
+        <div style="font-size:15px; font-weight:700; color:#003399; text-transform:uppercase; margin-bottom:6px;">UNDERSTAND</div>
+        <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+          <b>1 Understanding-You</b><br>
+          <span style="padding-left:10px; color:#666;">• Extracts role profile</span><br>
+          <b>2 Streamliner</b><br>
+          <span style="padding-left:10px; color:#666;">• Finds waste in SOPs</span>
+        </div>
+        <div style="font-size:12px; color:#E67E22; font-style:italic; margin-top:6px;">🧑 "Did we get you right?"</div>
+        <div style="font-size:11px; color:#28A745; margin-top:3px; border-top:2px dotted #28A745; padding-top:3px;">✓ Happy → next stage</div>
+      </div>
+      <svg class="arrow-svg" width="25" height="60" viewBox="0 0 25 60" style="align-self:center;flex-shrink:0;"><path d="M3,30 L18,30"/><path d="M14,26 L20,30 L14,34"/></svg>
+      <div class="hd-section blue" style="flex:1; padding:8px; margin:0 3px;">
+        <div style="font-size:15px; font-weight:700; color:#003399; text-transform:uppercase; margin-bottom:6px;">DESIGN</div>
+        <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+          <b>3 Architect</b><br>
+          <span style="padding-left:10px; color:#666;">• 3 scored options</span><br>
+          <b>4 Explainer</b><br>
+          <span style="padding-left:10px; color:#666;">• Reasoning clear</span><br>
+          <b>5 Quality</b><br>
+          <span style="padding-left:10px; color:#666;">• Enterprise standards</span>
+        </div>
+        <div style="font-size:12px; color:#E67E22; font-style:italic; margin-top:6px;">🧑 "Which architecture?"</div>
+        <div style="font-size:11px; color:#28A745; margin-top:3px; border-top:2px dotted #28A745; padding-top:3px;">✓ Happy → next stage</div>
+      </div>
+      <svg class="arrow-svg" width="25" height="60" viewBox="0 0 25 60" style="align-self:center;flex-shrink:0;"><path d="M3,30 L18,30"/><path d="M14,26 L20,30 L14,34"/></svg>
+      <div class="hd-section cyan" style="flex:1.2; padding:8px; margin:0 3px;">
+        <div style="font-size:15px; font-weight:700; color:#00B0CA; text-transform:uppercase; margin-bottom:6px;">BUILD</div>
+        <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+          <b>6 Builder</b><br>
+          <span style="padding-left:10px; color:#666;">• Twin skeleton</span><br>
+          <b>7 Cost Observer</b><br>
+          <span style="padding-left:10px; color:#666;">• Projects ROI</span><br>
+          <b>8 Profile Writer</b><br>
+          <span style="padding-left:10px; color:#666;">• Self-improving memory</span><br>
+          <b>9 Skill Constructor</b><br>
+          <span style="padding-left:10px; color:#666;">• Reasoning chains</span>
+        </div>
+        <div style="font-size:12px; color:#E67E22; font-style:italic; margin-top:6px;">🧑 "Happy with structure?"</div>
+        <div style="font-size:11px; color:#28A745; margin-top:3px; border-top:2px dotted #28A745; padding-top:3px;">✓ Happy → next stage</div>
+      </div>
+      <svg class="arrow-svg" width="25" height="60" viewBox="0 0 25 60" style="align-self:center;flex-shrink:0;"><path d="M3,30 L18,30"/><path d="M14,26 L20,30 L14,34"/></svg>
+      <div class="hd-section green" style="flex:1; padding:8px; margin:0 3px;">
+        <div style="font-size:15px; font-weight:700; color:#28A745; text-transform:uppercase; margin-bottom:6px;">VALIDATE</div>
+        <div style="font-size:13px; color:#343A40; line-height:1.5; padding-left:5px;">
+          <b>10 Parallel Run</b><br>
+          <span style="padding-left:10px; color:#666;">• Tests accuracy in shadow</span>
+        </div>
+        <div style="font-size:12px; color:#E67E22; font-style:italic; margin-top:6px;">🧑 "Accuracy OK?"</div>
+        <div style="font-size:11px; color:#28A745; margin-top:3px; border-top:2px dotted #28A745; padding-top:3px;">✓ Happy → output</div>
+      </div>
+    </div>
+
+    <svg class="arrow-svg" width="35" height="80" viewBox="0 0 35 80" style="align-self:center;flex-shrink:0;"><path d="M5,40 C12,38 20,42 28,40"/><path d="M22,35 L30,40 L22,45"/></svg>
+
+    <!-- OUTPUT -->
+    <div class="hd-section green" style="width:160px; padding:10px;">
+      <div style="font-size:18px; font-weight:700; color:#28A745;">OUTPUT</div>
+      <div style="font-size:16px; margin-top:8px; font-weight:700; color:#28A745;">Your Personal<br>Digital Twin</div>
+    </div>
+  </div>
+
+  <!-- Bottom pills -->
+  <div style="display:flex; justify-content:center; gap:20px; margin-top:20px; font-size:15px; font-weight:600; color:#003399;">
+    <span class="hd-pill blue">Sequential Steps</span>
+    <span class="hd-pill cyan">Autonomous Agents (Claude Sonnet 4)</span>
+    <span class="hd-pill orange">Human Gate Every Phase</span>
+    <span class="hd-pill green">Iterative Self-Improving</span>
+    <span class="hd-pill gold">Orchestration: Claude Code CLI</span>
+  </div>
+
+  <!-- Loop-back arrow with label -->
+  <svg class="arrow-svg orange" width="900" height="55" viewBox="0 0 900 55" style="display:block;margin:15px auto 0;">
+    <path d="M780,10 C800,28 780,42 730,44 C580,47 320,47 170,44 C120,42 100,28 120,10"/>
+    <path d="M125,16 L117,7 L113,18"/>
+    <text x="250" y="38" font-family="Caveat, cursive" font-size="22" fill="#E67E22" font-weight="700">Not happy? Loop back — never proceeds without your OK</text>
+  </svg>
+</div>
+
+<!-- ============================================
+     SLIDE 7: 4 Skills Daily Workflow
+     ============================================ -->
+<div class="slide" id="slide7">
+  <span class="slide-number">7 / 8</span>
+  <div class="slide-title">Your Daily Twin — 4 Skills Workflow</div>
+  <div class="slide-subtitle">Each skill is a governed agentic workflow with human approval</div>
+
+  <div class="hd-section blue" style="text-align:center; margin:8px 300px; padding:8px 20px;">
+    <span style="font-weight:700; color:#003399;">YOUR DIGITAL TWIN AGENT — ORCHESTRATOR</span><br>
+    <span style="font-size:14px; color:#666;">Coordinates all 4 skills | Manages cross-skill triggers</span>
+  </div>
+
+  <!-- Arrow down from orchestrator with label -->
+  <svg class="arrow-svg" width="250" height="35" viewBox="0 0 250 35" style="display:block;margin:0 auto;">
+    <path d="M125,3 C123,12 127,20 125,28"/><path d="M120,23 L125,32 L130,23"/>
+    <text x="140" y="22" font-family="Caveat, cursive" font-size="20" fill="#003399" font-weight="700">orchestrates</text>
+  </svg>
+
+  <!-- Compact table -->
+  <table style="margin:5px 80px; width:calc(100% - 160px); border-collapse:collapse; font-size:15px; border:1.5px solid #b8c8e0; border-radius:12px; overflow:hidden;">
+    <thead>
+      <tr style="border-bottom:2px solid #003399;">
+        <th style="width:40px; padding:6px 8px; text-align:center; color:#003399;"></th>
+        <th style="padding:6px 10px; text-align:center; color:#003399; font-size:14px;">TRIGGER</th>
+        <th style="padding:6px 10px; text-align:center; color:#003399; font-size:14px;">AGENTIC TASK</th>
+        <th style="padding:6px 10px; text-align:center; color:#003399; font-size:14px;">HUMAN-IN-THE-LOOP</th>
+        <th style="padding:6px 10px; text-align:center; color:#28A745; font-size:14px;">OUTPUT</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:10px 8px; text-align:center; font-weight:700; color:#003399;">S1</td>
+        <td style="padding:10px; text-align:center; color:#343A40;">New case arrives</td>
+        <td style="padding:10px; text-align:left; color:#343A40; font-size:13px;">• Read case<br>• Check policy<br>• Calculate settlement<br>• Draft letter</td>
+        <td style="padding:10px; text-align:center; color:#343A40; font-size:14px;">MS Teams:<br><b>Approve / Edit / Reject</b></td>
+        <td style="padding:10px; text-align:center; color:#28A745; font-weight:600; font-size:14px;">Decision sent,<br>letter delivered</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:10px 8px; text-align:center; font-weight:700; color:#003399;">S2</td>
+        <td style="padding:10px; text-align:center; color:#343A40;">New email inbox</td>
+        <td style="padding:10px; text-align:left; color:#343A40; font-size:13px;">• Identify sender<br>• Determine priority<br>• Draft reply in your style</td>
+        <td style="padding:10px; text-align:center; color:#343A40; font-size:14px;">Review draft:<br><b>Approve / Edit</b></td>
+        <td style="padding:10px; text-align:center; color:#28A745; font-weight:600; font-size:14px;">Reply sent,<br>matching your tone</td>
+      </tr>
+      <tr style="border-bottom:1px solid #eee;">
+        <td style="padding:10px 8px; text-align:center; font-weight:700; color:#00B0CA;">S3</td>
+        <td style="padding:10px; text-align:center; color:#343A40;">Cron: Day 3 + Day 7</td>
+        <td style="padding:10px; text-align:left; color:#343A40; font-size:13px;">• Pull KPIs<br>• Compare trends<br>• Flag anomalies</td>
+        <td style="padding:10px; text-align:center; color:#343A40; font-size:14px;">Review report:<br><b>Approve / Edit scope</b></td>
+        <td style="padding:10px; text-align:center; color:#28A745; font-weight:600; font-size:14px;">Report distributed</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 8px; text-align:center; font-weight:700; color:#28A745;">S4</td>
+        <td style="padding:10px; text-align:center; color:#343A40;">Cron: Thursday 7am</td>
+        <td style="padding:10px; text-align:left; color:#343A40; font-size:13px;">• Analyze 12 weeks<br>• Pick top 3 talking points<br>• Structure brief</td>
+        <td style="padding:10px; text-align:center; color:#343A40; font-size:14px;">Review brief:<br><b>Approve / Add topic</b></td>
+        <td style="padding:10px; text-align:center; color:#28A745; font-weight:600; font-size:14px;">EXCO briefing ready</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Bottom pills -->
+  <div style="display:flex; justify-content:center; gap:25px; margin-top:15px; font-size:15px; font-weight:600; color:#003399;">
+    <span>LLM: Claude Haiku 4 (cost-optimised)</span>
+    <span>|</span>
+    <span>Orchestration: n8n (free, self-hosted)</span>
+    <span>|</span>
+    <span>Human controls send via MS Teams</span>
+    <span>|</span>
+    <span>Auditable trail</span>
+  </div>
+
+  <!-- Major takeaway - subtitle style, lower -->
+  <div class="takeaway" style="margin-top:60px; font-size:48px; color:#003399;">
+    Governed Agentic Workflow — you stay in control
+  </div>
+</div>
+
+<!-- ============================================
+     SLIDE 8: Why This Is Truly Agentic
+     ============================================ -->
+<div class="slide" id="slide8">
+  <span class="slide-number">8 / 8</span>
+  <div class="slide-title">Why This Is Truly Agentic</div>
+  <div class="slide-subtitle">Not just a chatbot — Level 5 agentic AI workflow automation</div>
+
+  <!-- Top section: Staircase (left) | Table (right) -->
+  <div style="display:flex; margin:15px 60px; gap:40px; align-items:flex-start;">
+    <!-- Staircase illustration (left) -->
+    <div style="width:380px; padding:10px 18px; position:relative;">
+      <!-- CSS Staircase -->
+      <div style="display:flex; flex-direction:column; gap:0; align-items:flex-start;">
+        <!-- Level 5 (top, widest, gold) -->
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:2px;">
+          <div style="width:260px; height:38px; background:linear-gradient(90deg,#D4A017,#f0c040); border:2px solid #D4A017; border-radius:8px; display:flex; align-items:center; padding:0 12px;">
+            <span style="font-size:14px; font-weight:700; color:white;">★ Level 5: Agentic AI Workflow</span>
+          </div>
+          <span style="font-family:'Caveat',cursive; font-size:18px; color:#D4A017; font-weight:700;">← YOU ARE HERE</span>
+        </div>
+        <!-- Level 4 -->
+        <div style="margin-left:20px; margin-bottom:2px;">
+          <div style="width:210px; height:34px; background:#4A8FE7; border:2px solid #003399; border-radius:8px; display:flex; align-items:center; padding:0 12px;">
+            <span style="font-size:13px; font-weight:600; color:white;">Level 4: Multi-Agent</span>
+          </div>
+        </div>
+        <!-- Level 3 -->
+        <div style="margin-left:40px; margin-bottom:2px;">
+          <div style="width:170px; height:30px; background:#A8CCF0; border:2px solid #4A8FE7; border-radius:8px; display:flex; align-items:center; padding:0 12px;">
+            <span style="font-size:12px; font-weight:600; color:#003399;">Level 3: Single Agent</span>
+          </div>
+        </div>
+        <!-- Level 2 -->
+        <div style="margin-left:60px; margin-bottom:2px;">
+          <div style="width:140px; height:28px; background:#e0e6f0; border:2px solid #c8d4e8; border-radius:8px; display:flex; align-items:center; padding:0 12px;">
+            <span style="font-size:12px; color:#666;">Level 2: Assistant</span>
+          </div>
+        </div>
+        <!-- Level 1 -->
+        <div style="margin-left:80px;">
+          <div style="width:110px; height:26px; background:#f0f0f0; border:2px solid #ddd; border-radius:8px; display:flex; align-items:center; padding:0 12px;">
+            <span style="font-size:11px; color:#999;">Level 1: Chatbot</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Comparison table (center) -->
+    <div class="hd-section" style="padding:15px; flex:1;">
+      <table style="border-collapse:collapse; white-space:nowrap;">
+        <thead>
+          <tr><th style="padding:5px 20px; text-align:left; font-size:16px; color:#003399;">Capability</th><th style="padding:5px 20px; text-align:center; font-size:16px; color:#003399;">Lvl 4</th><th style="padding:5px 20px; text-align:center; font-size:16px; color:#003399;">Lvl 5</th></tr>
+        </thead>
+        <tbody>
+          <tr><td style="padding:4px 20px; font-size:16px;">Agentic thinking (RPDS)</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+          <tr><td style="padding:4px 20px; font-size:16px;">Orchestrator coordinates</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+          <tr><td style="padding:4px 20px; font-size:16px;">Memory + self-improvement</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+          <tr><td style="padding:4px 20px; font-size:16px;">Human gates every phase</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+          <tr><td style="padding:4px 20px; font-size:16px;">Cross-skill orchestration</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+          <tr><td style="padding:4px 20px; font-size:16px;">Failure recovery + loop-back</td><td style="text-align:center; color:#E67E22; font-weight:700; font-size:18px;">✗</td><td style="text-align:center; color:#28A745; font-weight:700; font-size:18px;">✓</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- What Level 5 means (right callout) -->
+    <div class="hd-section gold" style="width:300px; padding:18px;">
+      <div style="font-family:'Caveat',cursive; font-size:24px; font-weight:700; color:#D4A017; margin-bottom:10px;">What Level 5 Means</div>
+      <div style="font-size:15px; color:#343A40; line-height:1.8;">
+        🧠 Agents <b>think</b> — not just execute<br>
+        🔄 Agents <b>loop back</b> on failure<br>
+        📝 Agents <b>remember</b> and improve<br>
+        🤝 Human stays <b>in control</b><br>
+        ⚡ Skills <b>orchestrate</b> across each other
+      </div>
+    </div>
+  </div>
+
+  <!-- RPDS section -->
+  <div style="display:flex; gap:30px; margin:40px 80px 20px;">
+    <div class="hd-section blue" style="flex:1; padding:15px;">
+      <div style="font-size:18px; font-weight:700; color:#003399; margin-bottom:8px;">Layer 1 Factory — Agentic Orchestration</div>
+      <div style="font-size:14px; line-height:1.6;">
+        <span style="font-weight:700; color:#003399;">REASON:</span> User is claims handler, 4 daily tasks → design 4 skills<br>
+        <span style="font-weight:700; color:#00B0CA;">PLAN:</span> Skills 1+2 no dependency → build parallel<br>
+        <span style="font-weight:700; color:#28A745;">DECIDE:</span> Event triggers for Claims+Email, cron for Reports+EXCO<br>
+        <span style="font-weight:700; color:#E67E22;">SELF-CORRECT:</span> Quality gate 62% → loop back to redesign
+      </div>
+    </div>
+    <div class="hd-section cyan" style="flex:1; padding:15px;">
+      <div style="font-size:18px; font-weight:700; color:#00B0CA; margin-bottom:8px;">Layer 2 Twin — Cross-Skill Orchestration</div>
+      <div style="font-size:14px; line-height:1.6;">
+        <span style="font-weight:700; color:#003399;">REASON:</span> Reporting found claims spike 23% — needs escalation<br>
+        <span style="font-weight:700; color:#00B0CA;">PLAN:</span> Update EXCO Prep and Morning Brief with urgent flag<br>
+        <span style="font-weight:700; color:#28A745;">DECIDE:</span> Spike above threshold — escalate now, not wait for cron<br>
+        <span style="font-weight:700; color:#E67E22;">SELF-CORRECT:</span> Last week was seasonal — check typhoon season first
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom takeaway - subtitle font style and size -->
+  <div class="takeaway" style="margin-top:60px; font-size:44px;">
+    Every agent reasons, plans, decides, self-corrects. That is what makes this truly agentic.
+  </div>
+</div>
+
+</body>
+</html>

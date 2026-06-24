@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digital Twin Factory — Architecture</title>
+<style>
+@font-face {
+  font-family: 'ZurichSans';
+  src: url('../../.claude/Brand-assets/Typology/Zurich Sans/ZURICH SANS 2/WOFF/ZurichSans-Regular.woff');
+  font-weight: 400;
+}
+@font-face {
+  font-family: 'ZurichSans';
+  src: url('../../.claude/Brand-assets/Typology/Zurich Sans/ZURICH SANS 2/WOFF/ZurichSans-Bold.woff');
+  font-weight: 700;
+}
+@font-face {
+  font-family: 'ZurichSans';
+  src: url('../../.claude/Brand-assets/Typology/Zurich Sans/ZURICH SANS 2/WOFF/ZurichSans-Light.woff');
+  font-weight: 300;
+}
+@font-face {
+  font-family: 'ZurichSans';
+  src: url('../../.claude/Brand-assets/Typology/Zurich Sans/ZURICH SANS 2/WOFF/ZurichSans-SemiBold.woff');
+  font-weight: 600;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'ZurichSans', 'Segoe UI', sans-serif;
+  background: #FFFFFF;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Zurich brand shape decorations */
+.shape-deco {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.08;
+}
+.shape-deco.top-right {
+  width: 300px; height: 300px;
+  background: #003399;
+  top: -80px; right: -80px;
+}
+.shape-deco.bottom-left {
+  width: 200px; height: 200px;
+  background: #00B0CA;
+  bottom: -60px; left: -60px;
+}
+.shape-deco.mid-right {
+  width: 150px; height: 150px;
+  background: #1A2155;
+  top: 45%; right: -40px;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 50px 10px;
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.logo-area img {
+  height: 32px;
+}
+.header-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1A2155;
+  letter-spacing: -0.5px;
+}
+
+/* Hero message bar */
+.hero-bar {
+  background: linear-gradient(135deg, #003399, #1A2155);
+  margin: 0 50px;
+  padding: 14px 30px;
+  border-radius: 12px;
+  display: flex;
+  justify-content: center;
+  gap: 60px;
+  align-items: center;
+}
+.hero-msg {
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+.hero-msg .highlight {
+  color: #00B0CA;
+}
+.hero-divider {
+  width: 1px;
+  height: 24px;
+  background: rgba(255,255,255,0.3);
+}
+
+/* Main content grid */
+.main {
+  display: grid;
+  grid-template-columns: 1fr 80px 1fr;
+  grid-template-rows: 1fr;
+  gap: 0;
+  padding: 16px 50px 0;
+  height: calc(100% - 140px);
+}
+
+/* Layer cards */
+.layer-card {
+  border-radius: 16px;
+  padding: 20px 24px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Layer 1 */
+.layer1 {
+  background: linear-gradient(180deg, #F0F4FA 0%, #E8EEF7 100%);
+  border: 2px solid #003399;
+}
+.layer1::before {
+  content: '';
+  position: absolute;
+  top: -40px; right: -40px;
+  width: 120px; height: 120px;
+  background: #003399;
+  border-radius: 50%;
+  opacity: 0.06;
+}
+
+/* Layer 2 */
+.layer2 {
+  background: linear-gradient(180deg, #F0FAFB 0%, #E6F7F9 100%);
+  border: 2px solid #00B0CA;
+}
+.layer2::before {
+  content: '';
+  position: absolute;
+  bottom: -40px; left: -40px;
+  width: 120px; height: 120px;
+  background: #00B0CA;
+  border-radius: 50%;
+  opacity: 0.06;
+}
+
+.layer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+.layer-badge {
+  background: #003399;
+  color: #FFF;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.layer2 .layer-badge {
+  background: #00B0CA;
+}
+.layer-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1A2155;
+}
+.layer-subtitle {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+/* I/O/T boxes */
+.iot-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+.iot-box {
+  background: #FFF;
+  border-radius: 8px;
+  padding: 8px 10px;
+  border-left: 3px solid #003399;
+}
+.layer2 .iot-box {
+  border-left-color: #00B0CA;
+}
+.iot-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #003399;
+  letter-spacing: 0.5px;
+  margin-bottom: 3px;
+}
+.layer2 .iot-label {
+  color: #00B0CA;
+}
+.iot-value {
+  font-size: 11px;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* Agent list */
+.agents-section {
+  margin-bottom: 10px;
+}
+.agents-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #003399;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.agents-title .count {
+  background: #003399;
+  color: #FFF;
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+.agent-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.agent-chip {
+  background: #FFF;
+  border: 1px solid #B8CCE4;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 10px;
+  color: #1A2155;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.agent-chip .num {
+  background: #003399;
+  color: #FFF;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  font-size: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Skills section */
+.skills-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.skill-chip {
+  background: #FFF;
+  border: 1px solid #8DD4DE;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
+  color: #1A2155;
+  font-weight: 500;
+}
+.skill-chip .trigger-tag {
+  font-size: 9px;
+  color: #00B0CA;
+  display: block;
+  margin-top: 2px;
+}
+
+/* Re-run note */
+.rerun-note {
+  background: #FFF8E6;
+  border: 1px solid #F5D76E;
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 10px;
+  color: #5A4B00;
+  line-height: 1.4;
+}
+.rerun-note strong {
+  color: #003399;
+}
+
+/* Middle arrow section */
+.middle-arrow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.arrow-line {
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, #003399, #00B0CA);
+  position: relative;
+}
+.arrow-label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-90deg);
+  background: #FFF;
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #003399;
+  white-space: nowrap;
+  border: 2px solid #003399;
+  border-radius: 6px;
+  letter-spacing: 1px;
+}
+.arrow-head {
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 12px solid #00B0CA;
+  position: absolute;
+  bottom: 20px;
+}
+
+/* Department comparison */
+.dept-section {
+  margin-top: 10px;
+  background: #FFF;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid #8DD4DE;
+}
+.dept-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1A2155;
+  margin-bottom: 6px;
+}
+.dept-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+.dept-item {
+  font-size: 10px;
+  padding: 4px 8px;
+  background: #F0FAFB;
+  border-radius: 4px;
+  color: #333;
+  border-left: 2px solid #00B0CA;
+}
+.dept-item strong {
+  color: #1A2155;
+  display: block;
+  font-size: 9px;
+}
+
+/* Feedback section */
+.feedback-section {
+  margin-top: 10px;
+  background: #FFF;
+  border-radius: 10px;
+  padding: 10px 12px;
+  border: 1px solid #E0C7FF;
+}
+.feedback-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #1A2155;
+  margin-bottom: 6px;
+}
+.feedback-paths {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.feedback-path {
+  border-radius: 6px;
+  padding: 6px 8px;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.feedback-path.talk {
+  background: #EBF5FF;
+  border: 1px solid #003399;
+  color: #003399;
+}
+.feedback-path.output {
+  background: #FFF5EB;
+  border: 1px solid #E67E22;
+  color: #8B4513;
+}
+.feedback-path .path-title {
+  font-weight: 700;
+  font-size: 10px;
+  margin-bottom: 2px;
+}
+.feedback-path .path-example {
+  font-size: 9px;
+  opacity: 0.8;
+  font-style: italic;
+}
+.feedback-arrow {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+/* Bottom bar */
+.bottom-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #1A2155;
+  padding: 8px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.bottom-bar .stat {
+  color: #FFF;
+  font-size: 11px;
+  font-weight: 300;
+}
+.bottom-bar .stat strong {
+  color: #00B0CA;
+  font-weight: 700;
+}
+</style>
+</head>
+<body>
+
+<div class="shape-deco top-right"></div>
+<div class="shape-deco bottom-left"></div>
+<div class="shape-deco mid-right"></div>
+
+<!-- Header -->
+<div class="header">
+  <div class="logo-area">
+    <div class="header-title">Digital Twin Factory</div>
+  </div>
+  <div style="font-size:11px; color:#666;">Hyperchallenge 2026 | Gigi Ma | Zurich Insurance HK</div>
+</div>
+
+<!-- Hero bar -->
+<div class="hero-bar">
+  <div class="hero-msg"><span class="highlight">An Agent</span> That Creates Agents</div>
+  <div class="hero-divider"></div>
+  <div class="hero-msg">Your Twin, Tailored to <span class="highlight">Your</span> Day-to-Day</div>
+  <div class="hero-divider"></div>
+  <div class="hero-msg">Mine has 4 skills for my 4 daily tasks &mdash; <span class="highlight">yours will be completely different</span></div>
+</div>
+
+<!-- Main content -->
+<div class="main">
+
+  <!-- LAYER 1 -->
+  <div class="layer-card layer1">
+    <div class="layer-header">
+      <span class="layer-badge">Layer 1</span>
+      <span class="layer-title">Twin Factory</span>
+    </div>
+    <div class="layer-subtitle">"The Brain" &mdash; Pure Claude reasoning, no integrations</div>
+
+    <!-- I/O/T -->
+    <div class="iot-grid">
+      <div class="iot-box">
+        <div class="iot-label">Trigger</div>
+        <div class="iot-value">User says "Build my twin"</div>
+      </div>
+      <div class="iot-box">
+        <div class="iot-label">Input</div>
+        <div class="iot-value">Voice notes, SOPs, screen recordings &mdash; any unstructured data about your role</div>
+      </div>
+      <div class="iot-box">
+        <div class="iot-label">Output</div>
+        <div class="iot-value">A fully configured personal Digital Twin Agent (profile + skills + orchestrator)</div>
+      </div>
+    </div>
+
+    <!-- 11 Agents -->
+    <div class="agents-section">
+      <div class="agents-title">Factory Agents <span class="count">11</span></div>
+      <div class="agent-grid">
+        <div class="agent-chip"><span class="num">1</span>Understanding-You</div>
+        <div class="agent-chip"><span class="num">2</span>Process Streamliner</div>
+        <div class="agent-chip"><span class="num">3</span>Architecture Designer</div>
+        <div class="agent-chip"><span class="num">4</span>Architecture Explainer</div>
+        <div class="agent-chip"><span class="num">5</span>Quality Self-Assessor</div>
+        <div class="agent-chip"><span class="num">6</span>Twin & Skill Builder</div>
+        <div class="agent-chip"><span class="num">7</span>Cost-Benefit Observer</div>
+        <div class="agent-chip"><span class="num">8</span>Twin Profile Writer</div>
+        <div class="agent-chip"><span class="num">9</span>Skill Constructor</div>
+        <div class="agent-chip"><span class="num">10</span>Parallel Run Observer</div>
+        <div class="agent-chip"><span class="num">11</span>Factory Orchestrator</div>
+      </div>
+    </div>
+
+    <!-- Re-run note -->
+    <div class="rerun-note">
+      <strong>Runs once per user (~10 min).</strong> Re-run only when:<br>
+      &bull; Major role change (promoted, new department)<br>
+      &bull; Add/remove a skill requiring new data sources<br>
+      &bull; Accuracy stays below threshold after feedback
+    </div>
+  </div>
+
+  <!-- Middle Arrow -->
+  <div class="middle-arrow">
+    <div class="arrow-line">
+      <div class="arrow-label">PRODUCES</div>
+      <div class="arrow-head"></div>
+    </div>
+  </div>
+
+  <!-- LAYER 2 -->
+  <div class="layer-card layer2">
+    <div class="layer-header">
+      <span class="layer-badge">Layer 2</span>
+      <span class="layer-title">Your Digital Twin</span>
+    </div>
+    <div class="layer-subtitle">"The Body" &mdash; n8n orchestration (free) + Claude only when thinking needed</div>
+
+    <!-- I/O/T -->
+    <div class="iot-grid">
+      <div class="iot-box">
+        <div class="iot-label">Trigger</div>
+        <div class="iot-value">Daily: emails, new cases, cron schedules, user requests</div>
+      </div>
+      <div class="iot-box">
+        <div class="iot-label">Input</div>
+        <div class="iot-value">Live data from your systems (Outlook, claims, reports)</div>
+      </div>
+      <div class="iot-box">
+        <div class="iot-label">Output</div>
+        <div class="iot-value">Drafts requiring YOUR approval before any action</div>
+      </div>
+    </div>
+
+    <!-- 4 Skills (Gigi's example) -->
+    <div class="agents-section">
+      <div class="agents-title" style="color:#00B0CA;">My 4 Skills (Gigi's Twin) <span class="count" style="background:#00B0CA;">4</span></div>
+      <div class="skills-grid">
+        <div class="skill-chip">Claims Handling<span class="trigger-tag">Event: new case arrives</span></div>
+        <div class="skill-chip">Email Reply<span class="trigger-tag">Event: new email in inbox</span></div>
+        <div class="skill-chip">Reporting & Insights<span class="trigger-tag">Cron: Day 3 & 7 weekly</span></div>
+        <div class="skill-chip">EXCO / Boss Prep<span class="trigger-tag">Cron: Thursday 7am</span></div>
+      </div>
+    </div>
+
+    <!-- Department comparison -->
+    <div class="dept-section">
+      <div class="dept-title">Your Twin &#8800; My Twin &mdash; Same Factory, Different Skills</div>
+      <div class="dept-grid">
+        <div class="dept-item"><strong>Underwriting</strong>Risk assessment, pricing, referral triage</div>
+        <div class="dept-item"><strong>Finance</strong>Reconciliation, month-end, variance alerts</div>
+        <div class="dept-item"><strong>Renewal</strong>Expiry monitoring, retention offers, lapse risk</div>
+        <div class="dept-item"><strong>Acquisition</strong>Lead scoring, proposal generation, follow-up</div>
+      </div>
+    </div>
+
+    <!-- Feedback section -->
+    <div class="feedback-section">
+      <div class="feedback-title">Self-Improving: 2 Feedback Paths &rarr; Twin Profile Updates Instantly</div>
+      <div class="feedback-paths">
+        <div class="feedback-path talk">
+          <div class="path-title">"Talk to My Twin" (Tab 3)</div>
+          <div class="path-example">"Always use bullets for James"<br>"Never include page 2 in reports"<br>"Add a new skill for audit prep"</div>
+        </div>
+        <div class="feedback-path output">
+          <div class="path-title">Feedback at Output Level (Tab 4)</div>
+          <div class="path-example">e.g. Agent drafts email &rarr; you Edit tone<br>e.g. Agent suggests claim decision &rarr; you Reject &amp; explain why<br>[Approve] [Edit] [Reject]</div>
+        </div>
+      </div>
+      <div class="feedback-arrow">&darr; Both update Twin Profile &rarr; skill behaviour changes instantly &darr;</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Bottom bar -->
+<div class="bottom-bar">
+  <div class="stat">Layer 1: <strong>Claude-only</strong> (pure reasoning, once)</div>
+  <div class="stat">Layer 2: <strong>n8n + Claude</strong> (daily, orchestration free)</div>
+  <div class="stat">Running cost: <strong>&lt; 1/3</strong> naive approach</div>
+  <div class="stat">55,000 staff globally &rarr; <strong>55,000 unique twins</strong></div>
+</div>
+
+</body>
+</html>
