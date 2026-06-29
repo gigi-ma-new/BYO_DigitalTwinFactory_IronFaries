@@ -52,6 +52,8 @@ All deliverables are in the [`submission/`](submission/) folder:
 
 Prototype built using **Claude Code** (VS Code extension) as the development tool. Claude Code generates the Python source code (`app.py`); no traditional coding required — citizen developer workflow.
 
+**Prototype scope:** The Streamlit app demonstrates the full UX flow and agentic reasoning patterns with simulated data. Real Claude API integration (Factory Agent calls) is planned for Phase B production build — see Technical Summary for the full 2-layer architecture (Claude Sonnet for Factory, Claude Haiku for daily Twin operations).
+
 ---
 
 ## Team
