@@ -48,13 +48,7 @@ All deliverables are in the [`submission/`](submission/) folder:
 
 ---
 
-## 4. Supporting Visuals
-
-[`final_slides/`](final_slides/) — 8 presentation slide screenshots used in the deck and video.
-
----
-
-## 5. How This Was Built
+## 4. How This Was Built
 
 Prototype built using **Claude Code** (VS Code extension) as the development tool. Claude Code generates the Python source code (`app.py`); no traditional coding required — citizen developer workflow.
 
