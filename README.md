@@ -18,6 +18,17 @@ All deliverables are in the [`submission/`](submission/) folder:
 | `IronFaries_URL_to_Prototype.url` | Link to live prototype |
 | `IronFaries_VideoTranscript.md` | Demo video transcript |
 
+## Prototype Source Code
+
+- [`app.py`](app.py) — Streamlit prototype (Python), the main application
+- [`requirements.txt`](requirements.txt) — Dependencies
+- [`sample_inputs/`](sample_inputs/) — Sample documents for testing
+- **Live deployment:** [streamlit.app](https://byodigitaltwinfactoryironfaries-skmvxbzlgjxamd6fze5nj7.streamlit.app)
+
+## How This Was Built
+
+Prototype built using **Claude Code** (VS Code extension) as the development tool. Claude Code generates the Python source code (`app.py`); no traditional coding required — citizen developer workflow.
+
 ## Team
 
 - **Gigi Ma** — AI Evangelist, Zurich Insurance Hong Kong
